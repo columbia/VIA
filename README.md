@@ -120,24 +120,52 @@ After you loged in, you should run:
 
 to configure the bridged network for the VM.
 
-**TODO: better cmd**
-Then you can use the following command to run the VM:
+We provide several scripts for different VM configs:
 
 ```
-QEMU=./qemu/aarch64-softmmu/qemu-system-aarch64 \
-    ./run-qemu-realm.sh -c 1 \
-    -m 512m -k Image.nopref \
-    -i ubuntu-apache.img \
-    -a "swiotlb=force" \
-    --machextra realm=false
+run-vanilla-smp.sh  # Vanilla KVM and 2 vCPUs
+run-vanilla-up.sh   # Vanilla KVM and 1 vCPU
+run-realm-smp.sh    # CCA KVM and 2 vCPUs
+run-realm-up.sh     # CCA KVM and 1 vCPUs
 ```
 
-You can replace `apache` in `ubuntu-apache.img` with `hack`, `kern`, `mongo` or `redis` for `hackbench`. `kernbench`, `MongoDB` or `Redis`, 
+You can use the following command to run the VM using vanilla KVM and 2 vCPUs:
+
+```
+./run-vanilla-smp.sh apache
+```
+
+You can replace `apache` with `hack`, `kern`, `mongo` or `redis` for `hackbench`. `kernbench`, `MongoDB` or `Redis`, 
 respectively.
 
-After you run the command, QEMU will for the vCPUs being pinned to proceed. To pin the vCPUs, open a different shell and run:
+After you run the command, QEMU will wait for the vCPUs being pinned to proceed. To pin the vCPUs, open a different shell and run:
 
 ```
 ./pin_vcpu.sh
+```
+
+Once the vCPU(s) are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
+scripts on the jump host. We will cover this in the next section.
+
+### 2.4.2 Run the Benchmarks
+
+To run benchmarks on the bare metal, make sure you select the correct kernel (see [Choose the Kernel](#241-choose-the-kernel)). The bare metal host is
+configured with IP address `192.168.11.10`.
+
+To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`).
+If the network of the VM is configured correctly, its IP address should be `192.168.11.11`. You can use `ip addr` on the VM to check it out.
+
+You can launch the benchmarks on the **jump host** by:
+
+```
+./[bench].sh 192.168.10.11
+```
+
+`[bench]` can be `apache`, `hack`, `kern`, `mongo` or `redis`.
+
+The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
+
+```
+./avg [bench].txt
 ```
 
