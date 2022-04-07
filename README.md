@@ -62,6 +62,9 @@ to resume your previous screen session.
 #### 2.2.2 More GNU Screen
 
 Similar to vim, you can also split the current window in GNU Screen by `Ctrl-a` `|` for vertical split or `Ctrl-a` `S` for horizontal split.
+
+You can use `Ctrl-a` `TAB` to switch between different splited windows.
+
 You can use `Ctrl-a` `X` to close the splitted window(the closed window still runs on the background).
 
 ### 2.3 Boot the N1SDP
