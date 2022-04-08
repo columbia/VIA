@@ -1,0 +1,5 @@
+# 2 CPUs
+threadcount=48
+# UP
+# threadcount=48
+operationcount=3000000

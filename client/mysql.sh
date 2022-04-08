@@ -1,4 +1,5 @@
 #!/bin/bash
+#--table-size=10000 \
 
 SRV=$1
 
@@ -11,7 +12,7 @@ sysbench \
         --mysql-host=$SRV \
         --mysql-port=3306 \
         --tables=10 \
-        --table-size=10000 \
+        --table-size=500 \
         --threads=16 \
         --report-interval=2 \
         --mysql-ssl \
