@@ -13,13 +13,28 @@ Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performanc
 
 ### 2.1 Prerequisites
 
+#### 2.1.1 Connect to the Jump Host
+
 The N1SDP is connected to a jump host with a Intel Xeon E5-2690 8 cores CPU via a 1Gbps switch. You can use the jump host to access the N1SDP and
 run network benchmarks from the jump host as the client.
 
 Send an email to [osdi22paper196ae@gmail.com](mailto:osdi22paper196ae@gmail.com) with the subject "OSDI AE" and your ssh public key in the content so 
 we can register you to the server and send you instructions on connecting to it.
 
+
+#### 2.1.2 Setup the Jump Host
+
 Once you have access to the jump host, you may clone this repo to the jump host so you can use our script to run the benchmarks.
+
+```
+git clone git@github.com:columbia/osdi-paper196-ae.git; cd osdi-paper196-ae
+```
+
+You will need to download YCSB and memtier_benchmark.
+
+```
+./install.sh
+```
 
 ### 2.2 N1SDP Serial Port
 
