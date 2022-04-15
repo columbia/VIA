@@ -102,7 +102,7 @@ boots.
 
 If the system boots successfully, a GRUB menu should show up shortly after the POST. We will have a detailed explanation for each entry shortly.
 
-### 2.4 Running the Benchmarks
+### 2.4 Running the VM and Benchmarks
 
 Due to license contraints, we are not able to provide source code of ACCA software stacks for you to compile and install on the N1SDP.
 They are preinstalled on the N1SDP, including modified RMM, TF-A, CCA KVM and CCA QEMU, for running the benchmarks.
@@ -161,11 +161,19 @@ After you run the command, QEMU will wait for the vCPUs being pinned to proceed.
 Once the vCPU(s) are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
 scripts on the jump host. We will cover this in the next section.
 
+You can login to the VM either through the VM serial port or using ssh. The username and password for the VM are both `root`:
+```
+ssh -o StrictHostKeyChecking=no -o StrictHostKeyChecking=no root@192.168.11.11
+```
+
+Note that `-o StrictHostKeyChecking=no -o StrictHostKeyChecking=no` is required for ssh'ing to the VM because all VM is configured to use the same IP
+address but they have different ECDSA keys.
+
 ### 2.4.2 Running the Benchmarks
 
 **VM Benchmarks**
 
-To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`) before launching the VM
+To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`) before launching the VM.
 If the network of the VM is configured correctly, its IP address should be `192.168.11.11`. You can use `ip addr` on the VM to check it out.
 
 **Bare Metal Benchmarks**
@@ -212,3 +220,14 @@ The results will be saved to the corresponding `[bench].txt` and you can get the
 ./avg [bench].txt
 ```
 
+### 2.4.2 Epilogue
+
+After finishing the benchmark for a VM, please gently shutdown the VM by running `halt -p` on the VM to prevent VM disk image corruption.
+
+Since RMM shares the same virtual address space with the Linux kernel on this Arm v8 machine, you may encounter unstability when running CCA KVM due
+to insufficient TLB management. This problem can be solved on the Arm v9 platform but for this artifact evaluation, if you see erroneous behaviors of
+the machine, such as VM crashing or siginificant outlaying benchmark data, please reboot the N1SDP. We suggest you run CCA KVM on a fresh reboot for
+every benchmark.
+
+After you finish all performance evaluations, please kindly close all opened USBttys from the jump host so the following reviwers can proceed their
+evalutions.
