@@ -8,14 +8,14 @@ This artifact includes the mechanized Coq proofs for the security of RMM/EL3M, t
 
 ## 2. Performance Evaluation
 
-Since hardware support for ACCA is not avaiable yet, we provide a Arm Neoverse N1 System Development Platform (N1SDP) that runs modified RMM and 
-Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performance. We provide remote access for you to run benchmark on the N1SDP. 
+Since the hardware support for ACCA is not avaiable yet, we provide an Arm Neoverse N1 System Development Platform (N1SDP) that runs modified RMM and 
+Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performance. We provide remote access for you to run benchmarks on the N1SDP. 
 
 ### 2.1 Prerequisites
 
 #### 2.1.1 Connecting to the Jump Host
 
-The N1SDP is connected to a jump host with a Intel Xeon E5-2690 8 cores CPU via a 1Gbps switch. You can use the jump host to access the N1SDP and
+The N1SDP is connected to a jump host with two Intel Xeon E5-2690 8 cores CPUs via a 1Gbps switch. You can use the jump host to access the N1SDP and
 run network benchmarks from the jump host as the client.
 
 Send an email to [osdi22paper196ae@gmail.com](mailto:osdi22paper196ae@gmail.com) with the subject "OSDI AE" and your ssh public key in the content so 
@@ -24,13 +24,13 @@ we can register you to the server and send you instructions on connecting to it.
 
 #### 2.1.2 Setup the Jump Host
 
-Once you have access to the jump host, you may clone this repo to the jump host so you can use our script to run the benchmarks.
+Once you have access to the jump host, you may clone this repo to the it to run the benchmarks.
 
 ```
 git clone git@github.com:columbia/osdi-paper196-ae.git; cd osdi-paper196-ae/client
 ```
 
-You will need to download YCSB and memtier_benchmark.
+You will need to download YCSB and memtier_benchmark:
 
 ```
 ./install.sh
@@ -43,11 +43,12 @@ The N1SDP exposes two serial ports to the jump host as described below:
 - `/dev/ttyUSB0`: Motherboard Configuration Controller (MCC) console, can be used for power cycle for the N1SDP
 - `/dev/ttyUSB1`: the regular serial port for applicatons
 
-To connect to the serial port, you can use [GNU Screen](https://www.gnu.org/software/screen/):
+To connect to the serial port, you can use [GNU Screen](https://www.gnu.org/software/screen/), for example:
 
 ```
-screen /dev/ttyUSB0 115200
+screen /dev/ttyUSB1 115200
 ```
+
 #### 2.2.1 GNU Screen 101
 
 Below is a simple instruction for GNU Screen. You may refer to the manual page for more information.
@@ -56,7 +57,7 @@ If you are familiar with the GNU Screen, you can go ahead to [Boot the N1SDP](#2
 You can use `Ctrl-a` `c` to create a new window in the current session and open the other serial port:
 
 ```
-screen /dev/ttyUSB1 115200
+screen /dev/ttyUSB0 115200
 ```
 
 Then you can use `Ctrl-a` `c` again to create a new window to continue working on the shell of the jump host.
@@ -78,7 +79,7 @@ to resume your previous screen session.
 
 #### 2.2.2 More GNU Screen
 
-Similar to vim, you can also split the current window in GNU Screen by `Ctrl-a` `|` for vertical split or `Ctrl-a` `S` for horizontal split.
+Similar to vim, you can also split the current window in GNU Screen by `Ctrl-a` `|` for a vertical split or `Ctrl-a` `S` for a horizontal split.
 
 You can use `Ctrl-a` `TAB` to switch between different splited windows.
 
@@ -88,7 +89,7 @@ You can use `Ctrl-a` `X` to close the splitted window(the closed window still ru
 
 You can boot, reboot or shutdown the N1SDP through the MCC console (`/dev/ttyUSB0`).
 
-Here's a list of useful command:
+Here's a list of useful commands:
 
 ```
 + command ------------------+ function ---------------------------------+
@@ -104,14 +105,14 @@ If the system boots successfully, a GRUB menu should show up shortly after the P
 
 ### 2.4 Running the VM and Benchmarks
 
-Due to license contraints, we are not able to provide source code of ACCA software stacks for you to compile and install on the N1SDP.
+Due to license contraints, we are not able to provide the source code of ACCA software stacks for you to compile and install on the N1SDP.
 They are preinstalled on the N1SDP, including modified RMM, TF-A, CCA KVM and CCA QEMU, for running the benchmarks.
 
 RMM and TF-A are automatically loaded from the board when the machine powered up and the kernel will be loaded by GRUB.
 
 #### 2.4.1 Choosing the Kernel
 
-In the GRUB menu, you should see five (5) entries as explained below:
+In the GRUB menu, you should see four (4) entries as explained below:
 
 ```
 Ubuntu                            # DO NOT USE, Ubuntu stock kernel, incompatible with ACCA
@@ -126,10 +127,10 @@ Make sure you choose the entry `Ubuntu N1SDP realm` in the GRUB menu. After the 
 
 ```
 ssh ae@192.168.11.10
-Password: ae
+password: ae
 ```
 
-After you loged in, you should run:
+After you loged in, you can run:
 
 ```
 ./net.sh
@@ -140,25 +141,25 @@ to configure the bridged network for the VM.
 We provide scripts for different VM configurations:
 
 ```
-run-vanilla.sh        # Run Vanilla KVM
+run-kvm.sh.           # Run Vanilla KVM
 run-cca.sh            # Run CCA KVM
 ```
 
 You can use the following command to run the VM using vanilla KVM and 2 vCPUs:
 
 ```
-./run-vanilla.sh apache
+./run-kvm.sh apache
 ```
 
 You can replace `apache` with `hack`, `kern`, `memcached`, `mysql`, `mongo` or `redis` for different workloads.
 
-After you run the command, QEMU will wait for the vCPUs being pinned to proceed. To pin the vCPUs, open a different shell and run:
+After you run the command, QEMU will wait for the vCPUs being pinned to proceed. To pin the vCPUs, login to the N1SDP on a different shell and run:
 
 ```
 ./pin_vcpu.sh
 ```
 
-Once the vCPU(s) are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
+Once the vCPUs are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
 scripts on the jump host. We will cover this in the next section.
 
 You can login to the VM either through the VM serial port or using ssh. The username and password for the VM are both `root`:
@@ -198,7 +199,7 @@ MongoDB       | `sudo systemctl start mongodb.service`
 MySQL         | `sudo systemctl start mysql.service`
 Redis         | `sudo systemctl start redis-server.service`
 
-You can use `systemctl status redis-server.service` to see if the server is up.
+You can use `systemctl status service-name` to see if the server is up.
 
 You don't need any service for Hackbench or Kernbench.
 
@@ -210,9 +211,21 @@ You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for exa
 ./apache.sh 192.168.10.11
 ```
 
-`[bench]` can be `apache`, `hack`, `kern`, `memcached`, `mongo`, `mysql` or `redis`.
+`[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
 
 `IP` is `192.168.11.10` for native execution and `192.168.11.11` for the VM.
+
+For Hackbench and Kernbench:
+
+```
+# VM benchmarks
+./[hack|kern].sh root@192.168.11.11
+password: root
+
+# Bare metal benchmarks
+./[hack|kern].sh ae@192.168.11.10
+password: ae
+```
 
 The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
 
