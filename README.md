@@ -117,8 +117,7 @@ In the GRUB menu, you should see five (5) entries as explained below:
 Ubuntu                            # DO NOT USE, Ubuntu stock kernel, incompatible with ACCA
 Advanced options for Ubuntu       # DO NOT USE, Ubuntu stock kernel, incompatible with ACCA
 Ubuntu N1SDP realm                # Linux v5.12 kernel modified for ACCA, used for VM benchmarks
-Ubuntu N1SDP - SMP benchmark      # Linux v5.12 kernel, passed with cmdline maxcpus=1,mem=512m for baseline SMP native benchmarks
-Ubuntu N1SDP - UP benchmark       # Linux v5.12 kernel, passed with cmdline maxcpus=1,mem=512m used for baseline UP native benchmarks
+Ubuntu N1SDP - SMP benchmark      # Linux v5.12 kernel, passed with cmdline mem=512m for baseline SMP native benchmarks
 ```
 
 ### 2.4.2 Run the VM
