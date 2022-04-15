@@ -27,7 +27,7 @@ we can register you to the server and send you instructions on connecting to it.
 Once you have access to the jump host, you may clone this repo to the jump host so you can use our script to run the benchmarks.
 
 ```
-git clone git@github.com:columbia/osdi-paper196-ae.git; cd osdi-paper196-ae
+git clone git@github.com:columbia/osdi-paper196-ae.git; cd osdi-paper196-ae/client
 ```
 
 You will need to download YCSB and memtier_benchmark.
