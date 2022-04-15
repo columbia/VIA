@@ -227,6 +227,8 @@ password: root
 password: ae
 ```
 
+After each iteration is done, you will need to enter the password to download the results from the VM/N1SDP.
+
 The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
 
 ```
