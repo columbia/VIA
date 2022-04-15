@@ -12,7 +12,6 @@ for line in lines:
     try:
     	s += Decimal(line)
     except:
-        s = 0
         continue
     i += 1
 print(s / i)
