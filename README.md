@@ -13,11 +13,13 @@ Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performanc
 
 ### 2.1 Prerequisites
 
-The N1SDP is connected to a jump host with a Intel Xeon E5-2690 8 cores CPU via a **TODO** switch. You can use the jump host to access the N1SDP and
+The N1SDP is connected to a jump host with a Intel Xeon E5-2690 8 cores CPU via a 1Gbps switch. You can use the jump host to access the N1SDP and
 run network benchmarks from the jump host as the client.
 
-Send an email to **TODO** with the subject **TODO** and your ssh public key in the content so we can register you to the server and send you 
-instructions on connecting to it.
+Send an email to [osdi22paper196ae@gmail.com](mailto:osdi22paper196ae@gmail.com) with the subject "OSDI AE" and your ssh public key in the content so 
+we can register you to the server and send you instructions on connecting to it.
+
+Once you have access to the jump host, you may clone this repo to the jump host so you can use our script to run the benchmarks.
 
 ### 2.2 N1SDP Serial Port
 
@@ -109,7 +111,8 @@ Ubuntu N1SDP - UP benchmark       # Linux v5.12 kernel, passed with cmdline maxc
 Make sure you choose the entry `Ubuntu N1SDP realm` in the GRUB menu. After the login interface prompts, you can ssh to the N1SDP from the jump host:
 
 ```
-ssh root@192.168.11.10
+ssh ae@192.168.11.10
+Password: ae
 ```
 
 After you loged in, you should run:
@@ -120,23 +123,20 @@ After you loged in, you should run:
 
 to configure the bridged network for the VM.
 
-We provide several scripts for different VM configs:
+We provide scripts for different VM configurations:
 
 ```
-run-vanilla-smp.sh  # Vanilla KVM and 2 vCPUs
-run-vanilla-up.sh   # Vanilla KVM and 1 vCPU
-run-realm-smp.sh    # CCA KVM and 2 vCPUs
-run-realm-up.sh     # CCA KVM and 1 vCPUs
+run-vanilla.sh        # Run Vanilla KVM
+run-cca.sh            # Run CCA KVM
 ```
 
 You can use the following command to run the VM using vanilla KVM and 2 vCPUs:
 
 ```
-./run-vanilla-smp.sh apache
+./run-vanilla.sh apache
 ```
 
-You can replace `apache` with `hack`, `kern`, `mongo` or `redis` for `hackbench`. `kernbench`, `MongoDB` or `Redis`, 
-respectively.
+You can replace `apache` with `hack`, `kern`, `memcached`, `mysql`, `mongo` or `redis` for different workloads.
 
 After you run the command, QEMU will wait for the vCPUs being pinned to proceed. To pin the vCPUs, open a different shell and run:
 
@@ -161,7 +161,7 @@ You can launch the benchmarks on the **jump host** by:
 ./[bench].sh 192.168.10.11
 ```
 
-`[bench]` can be `apache`, `hack`, `kern`, `mongo` or `redis`.
+`[bench]` can be `apache`, `hack`, `kern`, `memcached`, `mongo`, `mysql` or `redis`.
 
 The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
 
