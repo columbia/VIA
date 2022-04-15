@@ -2,8 +2,9 @@
 #--table-size=10000 \
 
 SRV=$1
+REPTS=${2-10}
 
-for i in `seq 1 10`; do
+for i in `seq 1 $REPTS`; do
 sysbench \
         --db-driver=mysql \
         --mysql-user=sbtest \
