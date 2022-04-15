@@ -13,7 +13,7 @@ Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performanc
 
 ### 2.1 Prerequisites
 
-#### 2.1.1 Connect to the Jump Host
+#### 2.1.1 Connecting to the Jump Host
 
 The N1SDP is connected to a jump host with a Intel Xeon E5-2690 8 cores CPU via a 1Gbps switch. You can use the jump host to access the N1SDP and
 run network benchmarks from the jump host as the client.
@@ -84,7 +84,7 @@ You can use `Ctrl-a` `TAB` to switch between different splited windows.
 
 You can use `Ctrl-a` `X` to close the splitted window(the closed window still runs on the background).
 
-### 2.3 Boot the N1SDP
+### 2.3 Booting the N1SDP
 
 You can boot, reboot or shutdown the N1SDP through the MCC console (`/dev/ttyUSB0`).
 
@@ -102,14 +102,14 @@ boots.
 
 If the system boots successfully, a GRUB menu should show up shortly after the POST. We will have a detailed explanation for each entry shortly.
 
-### 2.4 Run the Benchmarks
+### 2.4 Running the Benchmarks
 
 Due to license contraints, we are not able to provide source code of ACCA software stacks for you to compile and install on the N1SDP.
 They are preinstalled on the N1SDP, including modified RMM, TF-A, CCA KVM and CCA QEMU, for running the benchmarks.
 
 RMM and TF-A are automatically loaded from the board when the machine powered up and the kernel will be loaded by GRUB.
 
-#### 2.4.1 Choose the Kernel
+#### 2.4.1 Choosing the Kernel
 
 In the GRUB menu, you should see five (5) entries as explained below:
 
@@ -120,7 +120,7 @@ Ubuntu N1SDP realm                # Linux v5.12 kernel modified for ACCA, used f
 Ubuntu N1SDP - SMP benchmark      # Linux v5.12 kernel, passed with cmdline mem=512m for baseline SMP native benchmarks
 ```
 
-### 2.4.2 Run the VM
+### 2.4.2 Running the VM
 
 Make sure you choose the entry `Ubuntu N1SDP realm` in the GRUB menu. After the login interface prompts, you can ssh to the N1SDP from the jump host:
 
@@ -161,21 +161,50 @@ After you run the command, QEMU will wait for the vCPUs being pinned to proceed.
 Once the vCPU(s) are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
 scripts on the jump host. We will cover this in the next section.
 
-### 2.4.2 Run the Benchmarks
+### 2.4.2 Running the Benchmarks
+
+**VM Benchmarks**
+
+To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`) before launching the VM
+If the network of the VM is configured correctly, its IP address should be `192.168.11.11`. You can use `ip addr` on the VM to check it out.
+
+**Bare Metal Benchmarks**
 
 To run benchmarks on the bare metal, make sure you select the correct kernel (see [Choose the Kernel](#241-choose-the-kernel)). The bare metal host is
 configured with IP address `192.168.11.10`.
 
-To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`).
-If the network of the VM is configured correctly, its IP address should be `192.168.11.11`. You can use `ip addr` on the VM to check it out.
-
-You can launch the benchmarks on the **jump host** by:
+You have to login to the N1SDP and start the correpsonding server program. For a more accurate performance measurement, you may want to only start one
+server program at once. All of them can be enabled/disabled by `systemctl`:
 
 ```
-./[bench].sh 192.168.10.11
+sudo systemctl [start|stop] service-name
+```
+
+The benchmarks and the correpsonding command to enable them are listed below:
+
+Benchmarks    | service-name
+--------------|:-----
+Apache        | `sudo systemctl start apache2.service`
+Memcached     | `sudo systemctl start memcached.service`
+MongoDB       | `sudo systemctl start mongodb.service`
+MySQL         | `sudo systemctl start mysql.service`
+Redis         | `sudo systemctl start redis-server.service`
+
+You can use `systemctl status redis-server.service` to see if the server is up.
+
+You don't need any service for Hackbench or Kernbench.
+
+**Using the Benchmark Scripts**
+
+You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for example:
+
+```
+./apache.sh 192.168.10.11
 ```
 
 `[bench]` can be `apache`, `hack`, `kern`, `memcached`, `mongo`, `mysql` or `redis`.
+
+`IP` is `192.168.11.10` for native execution and `192.168.11.11` for the VM.
 
 The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
 
