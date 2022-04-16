@@ -289,9 +289,9 @@ Proof.
       exploit (query_oracle_security hd hd' ld H)
     end; try assumption.
     { duplicate invs. destruct D. duplicate rel_secure. destruct D. simpl in *.
-      constructor; simpl; try assumption.}
+      constructor; simpl; try assumption. }
     { duplicate invs. destruct D. duplicate rel_secure. destruct D. simpl in *.
-      constructor; simpl; try assumption.}
+      constructor; simpl; try assumption. }
     intros (ld & Hld & Hrel0). rewrite Hld.
     clear id_share rel_secure invs.
     destruct Hrel0 as (id_share & invs & rel_secure).
