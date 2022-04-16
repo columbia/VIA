@@ -125,6 +125,10 @@ kvmtool instead. For now, We have made QEMU support CCA KVM and we will report t
 
 We also changed the client machine for the network benchmarks in order to make this artifact evaluation available to the reviwers so the kvmtool results may also change.
 
+| ![qemu-bench.png](figures/qemu-bench.png) |
+|:--:|
+| **Fig 1: Application benchmark performance using QEMU.** |
+
 ### 2.1 Prerequisites
 
 #### 2.1.1 Connecting to the Jump Host
