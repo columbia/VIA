@@ -8,8 +8,17 @@ This artifact includes the mechanized Coq proofs for the security of RMM/EL3M, t
 
 ## 2. Performance Evaluation
 
+### 2.0 Prelogue
+
+**Evaluation Platform**
 Since the hardware support for ACCA is not avaiable yet, we provide an Arm Neoverse N1 System Development Platform (N1SDP) that runs modified RMM and 
-Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performance. We provide remote access for you to run benchmarks on the N1SDP. 
+Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performance. We provide remote access for you to run benchmarks on the N1SDP.
+
+**Evaluation Tools**
+Due to legal issues, we cannot modify QEMU and make it support CCA KVM for performance evaluation by the time we submitted the paper. Therefore we use
+kvmtool instead. For now, We have made QEMU support CCA KVM and we will report the new benchmark results here.
+
+We also changed the client machine for the network benchmarks in order to make this artifact evaluation available to the reviwers so the kvmtool results may also change.
 
 ### 2.1 Prerequisites
 
