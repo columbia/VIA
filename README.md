@@ -121,7 +121,7 @@ Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performanc
 
 **Evaluation Tools**
 Due to legal issues, we cannot modify QEMU and make it support CCA KVM for performance evaluation by the time we submitted the paper. Therefore we use
-kvmtool instead. For now, We have made QEMU support CCA KVM and we will report the new benchmark results here.
+kvmtool instead. For now, We have made QEMU support CCA KVM and we will report the new benchmark results here(**Figure 1**).
 
 We also changed the client machine for the network benchmarks in order to make this artifact evaluation available to the reviwers so the kvmtool results may also change.
 
