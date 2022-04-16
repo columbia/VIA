@@ -1,0 +1,9 @@
+Require Export TableAux.Specs.find_next_level_idx.
+Require Export TableAux.Specs.validate_table_commands.
+Require Export TableAux.Specs.granule_fill_table.
+Require Export TableAux.Specs.table_has_destroyed.
+Require Export TableAux.Specs.table_maps_block.
+Require Export TableAux.Specs.invalidate_page.
+Require Export TableAux.Specs.invalidate_block.
+Require Export TableAux.Specs.invalidate_pages_in_block.
+Require Export TableAux.Specs.data_granule_measure.

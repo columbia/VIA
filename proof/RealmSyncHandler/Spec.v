@@ -1,0 +1,4 @@
+Require Export RealmSyncHandler.Specs.handle_data_abort.
+Require Export RealmSyncHandler.Specs.handle_instruction_abort.
+Require Export RealmSyncHandler.Specs.handle_realm_rsi.
+Require Export RealmSyncHandler.Specs.handle_sysreg_access_trap.

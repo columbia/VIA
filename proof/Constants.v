@@ -1,0 +1,1021 @@
+Require Import Coqlib.
+
+Open Local Scope Z_scope.
+
+Definition U64MAX := 18446744073709551615.
+
+Definition STATUS_SUCCESS := 0.
+Definition STATUS_ERROR_INPUT := 1.
+Definition STATUS_ERROR_MEMORY := 2.
+Definition STATUS_ERROR_ALIAS := 3.
+Definition STATUS_ERROR_IN_USE := 4.
+Definition STATUS_ERROR_REALM_STATE := 5.
+Definition STATUS_ERROR_OWNER := 6.
+Definition STATUS_ERROR_REC := 7.
+Definition STATUS_ERROR_RTT_WALK := 8.
+Definition STATUS_ERROR_RTT_ENTRY := 9.
+Definition STATUS_ERROR_COUNT := 11.
+
+Definition	GRANULE_STATE_NS := 0.
+Definition	GRANULE_STATE_DELEGATED := 1.
+Definition	GRANULE_STATE_RD := 2.
+Definition	GRANULE_STATE_REC := 3.
+Definition	GRANULE_STATE_DATA := 4.
+Definition	GRANULE_STATE_TABLE := 5.
+Definition	GRANULE_STATE_REC_LIST := 6.
+
+Definition SLOT_NS := 0.
+Definition	SLOT_DELEGATED := 1.
+Definition	SLOT_RD := 2.
+Definition	SLOT_REC := 3.
+Definition	SLOT_REC_TARGET := 4.
+Definition	SLOT_TABLE := 5.
+Definition	SLOT_REC_LIST := 6.
+Definition	SLOT_RTT2 := 7.
+Definition	NR_CPU_SLOTS := 8.
+
+Definition MEASUREMENT_ALGO_ZERO := 0.
+Definition MEASUREMENT_ALGO_SHA256 := 1.
+
+Definition	IPA_STATE_VACANT := 0.
+Definition	IPA_STATE_ABSENT := 1.
+Definition	IPA_STATE_PRESENT := 2.
+Definition	IPA_STATE_DESTROYED := 3.
+
+Definition	REALM_STATE_NEW := 0.
+Definition	REALM_STATE_ACTIVE := 1.
+
+Definition MAP_NS := 0.
+Definition UNMAP_NS := 1.
+
+Definition GPI_NS := 9.
+Definition GPI_REALM := 11.
+
+Definition EL3_TO_NS := 3.
+Definition EL3_TO_RMM := 4.
+
+Definition MAX_NUM_RECS := 512.
+
+Definition ESR_ABORT_MASK := 4095.
+Definition HANDLE_ID_SYSREG_MASK := 255.
+Definition VTTBR_ADDR_MASK := 281474976710654.
+Definition PSTATE_INIT := 965.
+Definition MAX_ADDRESS := 281474976710656.
+Definition NR_TABLE_LEVELS := 4.
+
+Definition IPA_BITS := 48.
+Definition IPA_SIZE := 281474976710656.
+Definition IPA_MASK := 281474976706560.
+Definition REC_CREATE_NR_GPRS := 8.
+Definition REC_PARAMS_FLAG_RUNNABLE := 1.
+Definition SZ_1K := 1024.
+Definition SZ_1M := 1048576.
+Definition SZ_1G := 1073741824.
+Definition SZ_4K := 4096.
+Definition SZ_16K := 16384.
+Definition SZ_64K := 65536.
+Definition SZ_2G := 2147483648.
+Definition SZ_2M := 2097152.
+Definition RMM_PHYS := 100663296.
+Definition RMM_VIRT := 18446744004990074880.
+Definition SLOT_VIRT := 18446744071562067968.
+Definition UART0_VIRT := 18446744073709486080.
+Definition UART0_PHYS := 470417408.
+Definition MEM0_PHYS := 2147483648.
+Definition MEM0_SIZE := 2147483648.
+Definition ASC0_VIRT := 18446744073709420544.
+Definition MEM1_PHYS := 36507222016.
+Definition MEM1_SIZE := 2147483648.
+Definition MAX_CPUS := 16.
+Definition GRANULE_SIZE := 4096.
+Definition GRANULE_SHIFT := 12.
+Definition GRANULE_MASK := 18446744073709547520.
+Definition NOT_GRANULE_MASK := 4095.
+Definition NR_GRANULES := 524288.
+Definition HAS_MPAM := 0.
+Definition DESC_TYPE_MASK := 3.
+Definition PGTES_PER_TABLE := 512.
+Definition BLOCK_L2_SIZE := 2097152.
+Definition PGTE_S2_L012_TABLE := 3.
+Definition PGTE_S2_L012_BLOCK := 1.
+Definition PGTE_S2_L3_PAGE := 3.
+Definition PGTE_S2_MEMATTR_FWB_NORMAL_WB := 24.
+Definition PGTE_S2_AP_RW := 192.
+Definition PGTE_S2_SH_IS := 768.
+Definition PGTE_S2_AF := 1024.
+Definition PGTE_S2_XN := 18014398509481984.
+Definition PGTE_S2_NS := 36028797018963968.
+Definition PGTE_S2_ATTRS := 2008.
+Definition PGTE_S2_TABLE := 3.
+Definition PGTE_S2_BLOCK := 2009.
+Definition PGTE_S2_PAGE := 2011.
+Definition PGTE_INVALID := 0.
+Definition PGTE_S2_NS_ATTRS := 54043195528447963.
+Definition PTE_IPA_STATE_SHIFT := 56.
+Definition PTE_IPA_STATE_MASK := 504403158265495552.
+Definition EXIT_REASON_RSI_DISPOSE := 5.
+Definition REC_RUN_HVC_NR_GPRS := 7.
+Definition RVIC_BITMAP_BYTES := 64.
+Definition RVIC_BITMAP_ULS := 8.
+Definition BITS_PER_UL := 64.
+Definition PSCI_RETURN_SUCCESS := 0.
+Definition PSCI_RETURN_NOT_SUPPORTED := 4294967295.
+Definition PSCI_RETURN_INVALID_PARAMS := 4294967294.
+Definition PSCI_RETURN_DENIED := 4294967293.
+Definition PSCI_RETURN_ALREADY_ON := 4294967292.
+Definition PSCI_RETURN_ON_PENDING := 4294967291.
+Definition PSCI_RETURN_INTERNAL_FAILURE := 4294967290.
+Definition PSCI_RETURN_NOT_PRESENT := 4294967289.
+Definition PSCI_RETURN_DISABLED := 4294967288.
+Definition PSCI_RETURN_INVALID_ADDRESS := 4294967287.
+Definition SPSR_EL2_MODE_SHIFT := 0.
+Definition SPSR_EL2_MODE_WIDTH := 4.
+Definition SPSR_EL2_MODE_EL0t := 0.
+Definition SPSR_EL2_MODE_EL1h := 5.
+Definition SPSR_EL2_nRW_SHIFT := 4.
+Definition SPSR_EL2_nRW_WIDTH := 1.
+Definition SPSR_EL2_nRW_AARCH64 := 0.
+Definition SPSR_EL2_nRW_AARCH32 := 16.
+Definition SPSR_EL2_F_SHIFT := 6.
+Definition SPSR_EL2_F_WIDTH := 1.
+Definition SPSR_EL2_F_BIT := 64.
+Definition SPSR_EL2_I_SHIFT := 7.
+Definition SPSR_EL2_I_WIDTH := 1.
+Definition SPSR_EL2_I_BIT := 128.
+Definition SPSR_EL2_A_SHIFT := 8.
+Definition SPSR_EL2_A_WIDTH := 1.
+Definition SPSR_EL2_A_BIT := 256.
+Definition SPSR_EL2_D_SHIFT := 9.
+Definition SPSR_EL2_D_WIDTH := 1.
+Definition SPSR_EL2_D_BIT := 512.
+Definition SPSR_EL2_SSBS_SHIFT := 12.
+Definition SPSR_EL2_SSBS_WIDTH := 1.
+Definition SPSR_EL2_SSBS_BIT := 4096.
+Definition SPSR_EL2_IL_SHIFT := 20.
+Definition SPSR_EL2_IL_WIDTH := 1.
+Definition SPSR_EL2_IL_BIT := 1048576.
+Definition SPSR_EL2_SS_SHIFT := 21.
+Definition SPSR_EL2_SS_WIDTH := 1.
+Definition SPSR_EL2_SS_BIT := 2097152.
+Definition SPSR_EL2_PAN_SHIFT := 22.
+Definition SPSR_EL2_PAN_WIDTH := 1.
+Definition SPSR_EL2_PAN_BIT := 4194304.
+Definition SPSR_EL2_UAO_SHIFT := 23.
+Definition SPSR_EL2_UAO_WIDTH := 1.
+Definition SPSR_EL2_UAO_BIT := 8388608.
+Definition SPSR_EL2_V_SHIFT := 28.
+Definition SPSR_EL2_V_WIDTH := 1.
+Definition SPSR_EL2_V_BIT := 268435456.
+Definition SPSR_EL2_C_SHIFT := 29.
+Definition SPSR_EL2_C_WIDTH := 1.
+Definition SPSR_EL2_C_BIT := 536870912.
+Definition SPSR_EL2_Z_SHIFT := 30.
+Definition SPSR_EL2_Z_WIDTH := 1.
+Definition SPSR_EL2_Z_BIT := 1073741824.
+Definition SPSR_EL2_N_SHIFT := 31.
+Definition SPSR_EL2_N_WIDTH := 1.
+Definition SPSR_EL2_N_BIT := 2147483648.
+Definition SCTLR_EL1_EE := 33554432.
+Definition SCTLR_EL1_SPAN := 8388608.
+Definition SCTLR_EL1_EIS := 4194304.
+Definition SCTLR_EL1_nTWE := 262144.
+Definition SCTLR_EL1_nTWI := 65536.
+Definition SCTLR_EL1_EOS := 2048.
+Definition SCTLR_EL1_nAA := 64.
+Definition SCTLR_EL1_CP15BEN := 32.
+Definition SCTLR_EL1_SA0 := 16.
+Definition SCTLR_EL1_SA := 8.
+Definition SCTLR_EL1_FLAGS := 12912760.
+Definition SMC32_PSCI_BASE := 2214592512.
+Definition SMC64_PSCI_BASE := 3288334336.
+Definition SMC32_PSCI_VERSION := 2214592512.
+Definition SMC32_PSCI_CPU_SUSPEND := 2214592513.
+Definition SMC64_PSCI_CPU_SUSPEND := 3288334337.
+Definition SMC32_PSCI_CPU_OFF := 2214592514.
+Definition SMC32_PSCI_CPU_ON := 2214592515.
+Definition SMC64_PSCI_CPU_ON := 3288334339.
+Definition SMC32_PSCI_AFFINITY_INFO := 2214592516.
+Definition SMC64_PSCI_AFFINITY_INFO := 3288334340.
+Definition SMC32_PSCI_SYSTEM_OFF := 2214592520.
+Definition SMC32_PSCI_SYSTEM_RESET := 2214592521.
+Definition SMC32_PSCI_FEATURES := 2214592522.
+Definition SMC32_PSCI_MAX := 2214592543.
+Definition SMC64_PSCI_MAX := 3288334367.
+Definition RVIC_INFO_KEY_NR_TRUSTED_INTERRUPTS := 0.
+Definition RVIC_INFO_KEY_NR_UNTRUSTED_INTERRUPTS := 1.
+Definition RVIC_STATUS_SUCCESS := 0.
+Definition RVIC_STATUS_ERROR_PARAMETER := 1.
+Definition RVIC_STATUS_INVALID_CPU := 2.
+Definition RVIC_STATUS_DISABLED := 3.
+Definition RVIC_STATUS_NO_INTERRUPT := 4.
+Definition NR_TRUSTED_INTERRUPTS := 32.
+Definition NR_UNTRUSTED_INTERRUPTS := 480.
+Definition NR_INTERRUPTS := 512.
+Definition INTID_TRUSTED_BASE := 0.
+Definition INTID_TRUSTED_MAX := 31.
+Definition INTID_UNTRUSTED_BASE := 32.
+Definition INTID_UNTRUSTED_MAX := 511.
+Definition INTID_SPURIOUS := 18446744073709551615.
+Definition INTID_VTIMER_EL1 := 27.
+Definition INTID_PTIMER_EL1 := 30.
+Definition MPIDR_EL1_AFF_MASK := 255.
+Definition MPIDR_EL1_AFF0_SHIFT := 0.
+Definition MPIDR_EL1_AFF1_SHIFT := 8.
+Definition MPIDR_EL1_AFF2_SHIFT := 16.
+Definition MPIDR_EL1_AFF3_SHIFT := 32.
+Definition MPIDR_EL1_AFF0 := 255.
+Definition MPIDR_EL1_AFF1 := 65280.
+Definition MPIDR_EL1_AFF2 := 16711680.
+Definition MPIDR_EL1_AFF3 := 1095216660480.
+Definition SMC64_RVIC_BASE := 3305112064.
+Definition SMC64_RVIC_VERSION := 3305112064.
+Definition SMC64_RVIC_INFO := 3305112065.
+Definition SMC64_RVIC_ENABLE := 3305112066.
+Definition SMC64_RVIC_DISABLE := 3305112067.
+Definition SMC64_RVIC_SET_MASKED := 3305112068.
+Definition SMC64_RVIC_CLEAR_MASKED := 3305112069.
+Definition SMC64_RVIC_IS_PENDING := 3305112070.
+Definition SMC64_RVIC_SIGNAL := 3305112071.
+Definition SMC64_RVIC_CLEAR_PENDING := 3305112072.
+Definition SMC64_RVIC_ACKNOWLEDGE := 3305112073.
+Definition SMC64_RVIC_RESAMPLE := 3305112074.
+Definition SMC64_RVIC_MAX := 3305112074.
+Definition SMC_RETURN_UNKNOWN_FUNCTION := 4294967295.
+Definition PMCR_EL0_RES1 := 64.
+Definition MDSCR_EL1_TDCC_BIT := 4096.
+Definition CNTHCTL_EL2_NO_TRAPS := 3072.
+Definition HCR_FLAGS := 70388072318015.
+Definition VTCR_FLAGS := 3221370256.
+Definition ESR_EL2_EC_MASK := 4227858432.
+Definition ESR_EL2_EC_DATA_ABORT := 2415919104.
+Definition ESR_EL2_ABORT_ISV_BIT := 16777216.
+Definition NOT_ESR_EL2_ABORT_ISV_BIT := 18446744073692774399.
+Definition ESR_EL2_EC_HVC := 1476395008.
+Definition CNTx_CTL_ENABLE := 1.
+Definition CNTx_CTL_IMASK := 2.
+Definition CNTx_CTL_ISTATUS := 4.
+Definition CNTHCTL_EL2_EL1PCTEN := 1024.
+Definition CNTHCTL_EL2_EL1PTEN := 2048.
+Definition NOT_CNTHCTL_EL2_EL1PTEN := 18446744073709549567.
+Definition CNTHCTL_EL2_EL1TVT := 8192.
+Definition NOT_CNTHCTL_EL2_EL1TVT := 18446744073709543423.
+Definition CNTHCTL_EL2_EL1TVCT := 16384.
+Definition HCR_FB := 512.
+Definition HCR_VI := 128.
+Definition NOT_HCR_VI := 18446744073709551487.
+Definition HCR_AMO := 32.
+Definition HCR_IMO := 16.
+Definition HCR_FMO := 8.
+Definition HCR_PTW := 4.
+Definition HCR_SWIO := 2.
+Definition HCR_VM := 1.
+Definition ICC_SRE_EL2_ENABLE := 8.
+Definition NOT_ICC_SRE_EL2_ENABLE := 18446744073709551607.
+Definition ESR_EL2_ABORT_FSC_MASK := 63.
+Definition ESR_EL2_ABORT_SAS_MASK := 12582912.
+Definition ESR_EL2_ABORT_FNV_BIT := 1024.
+Definition ESR_EL2_ABORT_WNR_BIT := 64.
+Definition ESR_EL2_ABORT_FSC_LEVEL_MASK := 3.
+Definition NOT_ESR_EL2_ABORT_FSC_LEVEL_MASK := 18446744073709551612.
+Definition ESR_EL2_ABORT_FSC_PERMISSION_FAULT := 12.
+Definition ESR_EL2_ABORT_FSC_TRANSLATION_FAULT := 4.
+Definition HPFAR_EL2_FIPA_MASK := 17592186044400.
+Definition HPFAR_EL2_FIPA_OFFSET := 8.
+Definition SMC_RSI_ABI_VERSION := 3355443200.
+Definition RSI_ABI_VERSION := 196608.
+Definition SMC_RSI_MEMORY_DISPOSE := 3355443201.
+Definition EXIT_REASON_REC_INTERRUPT_PENDING := 4.
+Definition EXIT_REASON_PSCI := 3.
+Definition ESR_EL2_EC_WFX := 67108864.
+Definition ESR_EL2_WFx_TI_BIT := 1.
+Definition ESR_EL2_xVC_IMM_MASK := 65535.
+Definition ESR_EL2_EC_SMC := 1543503872.
+Definition ESR_EL2_EC_SYSREG := 1610612736.
+Definition ESR_EL2_EC_INST_ABORT := 2147483648.
+Definition ICC_HPPIR1_EL1_INTID := 16777215.
+Definition EXIT_REASON_IRQ := 1.
+Definition ESR_EL2_SYSREG_ID_MASK := 3275776.
+Definition ESR_EL2_SYSREG_ID := 3145728.
+Definition ESR_EL2_SYSREG_TIMERS_MASK := 3210264.
+Definition ESR_EL2_SYSREG_TIMERS := 3209216.
+Definition ESR_EL2_SYSREG_ICC_EL1_MASK := 3210256.
+Definition ESR_EL2_SYSREG_ICC_EL1 := 3158032.
+Definition ESR_EL2_IL_MASK := 4227858432.
+Definition ARM_EXCEPTION_SYNC_LEL := 0.
+Definition EXIT_REASON_SYNC := 0.
+Definition ARM_EXCEPTION_IRQ_LEL := 1.
+Definition ARM_EXCEPTION_FIQ_LEL := 2.
+Definition EXIT_REASON_FIQ := 2.
+Definition RMI_ABI_VERSION := 1572864.
+Definition ESR_EL2_SYSREG_MASK := 4193310.
+Definition ESR_EL2_SYSREG_ID_AA64ISAR1_EL1 := 3276812.
+Definition ESR_EL2_SYSREG_DIRECTION := 1.
+Definition ESR_EL2_SYSREG_TIMER_CNTV_TVAL_EL0 := 3209222.
+Definition ESR_EL2_SYSREG_TIMER_CNTV_CTL_EL0 := 3340294.
+Definition ESR_EL2_SYSREG_TIMER_CNTV_CVAL_EL0 := 3471366.
+Definition ESR_EL2_SYSREG_TIMER_CNTP_TVAL_EL0 := 3209220.
+Definition ESR_EL2_SYSREG_TIMER_CNTP_CTL_EL0 := 3340292.
+Definition ESR_EL2_SYSREG_TIMER_CNTP_CVAL_EL0 := 3471364.
+Definition SMC_RETURN_OK := 0.
+Definition SMC_ASC_RETURN_ERR_ADDRESS := 4294967294.
+Definition SMC_ASC_RETURN_ERR_PAS := 4294967293.
+Definition SMC_ASC_MARK_REALM := 256.
+Definition SMC_ASC_MARK_NONSECURE := 257.
+Definition x0 := 0.
+Definition x1 := 1.
+Definition x2 := 2.
+Definition x3 := 3.
+Definition x4 := 4.
+Definition x5 := 5.
+Definition x6 := 6.
+Definition x7 := 7.
+Definition x8 := 8.
+Definition x9 := 9.
+Definition x10 := 10.
+Definition x11 := 11.
+Definition x12 := 12.
+Definition x13 := 13.
+Definition x14 := 14.
+Definition x15 := 15.
+Definition x16 := 16.
+Definition x17 := 17.
+Definition x18 := 18.
+Definition x19 := 19.
+Definition x20 := 20.
+Definition x21 := 21.
+Definition x22 := 22.
+Definition x23 := 23.
+Definition x24 := 24.
+Definition x25 := 25.
+Definition x26 := 26.
+Definition x27 := 27.
+Definition x28 := 28.
+Definition x29 := 29.
+Definition x30 := 30.
+Definition lr := 31.
+Definition cntp_ctl_el0 := 32.
+Definition cntp_cval_el0 := 33.
+Definition cntp_tval_el0 := 34.
+Definition cntv_ctl_el0 := 35.
+Definition cntv_cval_el0 := 36.
+Definition cntv_tval_el0 := 37.
+Definition sp_el0 := 38.
+Definition pmcr_el0 := 39.
+Definition pmuserenr_el0 := 40.
+Definition tpidrro_el0 := 41.
+Definition tpidr_el0 := 42.
+Definition sp_el1 := 43.
+Definition elr_el1 := 44.
+Definition spsr_el1 := 45.
+Definition csselr_el1 := 46.
+Definition sctlr_el1 := 47.
+Definition actlr_el1 := 48.
+Definition cpacr_el1 := 49.
+Definition zcr_el1 := 50.
+Definition ttbr0_el1 := 51.
+Definition ttbr1_el1 := 52.
+Definition tcr_el1 := 53.
+Definition esr_el1 := 54.
+Definition afsr0_el1 := 55.
+Definition afsr1_el1 := 56.
+Definition far_el1 := 57.
+Definition mair_el1 := 58.
+Definition vbar_el1 := 59.
+Definition contextidr_el1 := 60.
+Definition tpidr_el1 := 61.
+Definition amair_el1 := 62.
+Definition cntkctl_el1 := 63.
+Definition par_el1 := 64.
+Definition mdscr_el1 := 65.
+Definition mdccint_el1 := 66.
+Definition disr_el1 := 67.
+Definition mpam0_el1 := 68.
+Definition cnthctl_el2 := 69.
+Definition cntvoff_el2 := 70.
+Definition cntpoff_el2 := 71.
+Definition vmpidr_el2 := 72.
+Definition vttbr_el2 := 73.
+Definition vtcr_el2 := 74.
+Definition hcr_el2 := 75.
+Definition actlr_el2 := 76.
+Definition afsr0_el2 := 77.
+Definition afsr1_el2 := 78.
+Definition amair_el2 := 79.
+Definition cptr_el2 := 80.
+Definition elr_el2 := 81.
+Definition esr_el2 := 82.
+Definition far_el2 := 83.
+Definition hacr_el2 := 84.
+Definition hpfar_el2 := 85.
+Definition hstr_el2 := 86.
+Definition mair_el2 := 87.
+Definition mpam_el2 := 88.
+Definition mpamhcr_el2 := 89.
+Definition pmscr_el2 := 90.
+Definition sctlr_el2 := 91.
+Definition scxtnum_el2 := 92.
+Definition sp_el2 := 93.
+Definition spsr_el2 := 94.
+Definition tcr_el2 := 95.
+Definition tfsr_el2 := 96.
+Definition tpidr_el2 := 97.
+Definition trfcr_el2 := 98.
+Definition ttbr0_el2 := 99.
+Definition ttbr1_el2 := 100.
+Definition vbar_el2 := 101.
+Definition vdisr_el2 := 102.
+Definition vncr_el2 := 103.
+Definition vpidr_el2 := 104.
+Definition vsesr_el2 := 105.
+Definition vstcr_el2 := 106.
+Definition vsttbr_el2 := 107.
+Definition zcr_el2 := 108.
+Definition icc_sre_el2 := 109.
+Definition ICC_HPPIR1_EL1 := 110.
+Definition spsr_el3 := 111.
+Definition elr_el3 := 112.
+Definition tpidr_el3 := 113.
+Definition esr_el3 := 114.
+Definition scr_el3 := 115.
+Definition elr_el12 := elr_el1.
+Definition sctlr_el12 := sctlr_el1.
+Definition spsr_el12 := spsr_el1.
+Definition cpacr_el12 := cpacr_el1.
+Definition ttbr0_el12 := ttbr0_el1.
+Definition ttbr1_el12 := ttbr1_el1.
+Definition tcr_el12 := tcr_el1.
+Definition esr_el12 := esr_el1.
+Definition afsr0_el12 := afsr0_el1.
+Definition afsr1_el12 := afsr1_el1.
+Definition far_el12 := far_el1.
+Definition mair_el12 := mair_el1.
+Definition vbar_el12 := vbar_el1.
+Definition contextidr_el12 := contextidr_el1.
+Definition amair_el12 := amair_el1.
+Definition cntkctl_el12 := cntkctl_el1.
+Definition MPAM0_EL1 := mpam0_el1.
+Definition cntp_cval_el02 := cntp_ctl_el0.
+Definition cntv_cval_el02 := cntv_cval_el0.
+Definition cntv_ctl_el02 := cntv_ctl_el0.
+Definition cntp_ctl_el02 := cntp_ctl_el0.
+Definition cntv_tval_el02 := cntv_tval_el0.
+Definition cntp_tval_el02 := cntp_tval_el0.
+Definition ICC_SRE_EL2 := icc_sre_el2.
+
+Definition ESR_EC := 4227858432. (* 0b111111 << 26 *)
+Definition ESR_EC_SMC := 1543503872. (* 0b010111 << 26 *)
+Definition ESR_EC_SMC_IMM16 := 65535. (* 0xffff *)
+Definition SMC_STD_CALL_MASK := 65535. (* 0xFFFF *)
+Definition NOT_SMC_STD_CALL_MASK := 18446744073709486080.
+Definition SMC_STD_CALL_BASE := 3288334336. (* 0xC4000000 *)
+Definition SMC_ARM_ARCH_CALL_MASK := 65535. (* 0xFFFF *)
+Definition NOT_SMC_ARM_ARCH_CALL_MASK := 18446744073709486080.
+Definition SMC_ARM_ARCH_CALL_BASE := 3221225472. (* 0xC0000000 *)
+Definition SMC_ASC_MARK_SECURE := 256.
+Definition SCR_WORLD_MASK := 17.
+Definition SCR_REALM_WORLD := 17.
+Definition SCR_NS_WORLD := 1.
+Definition CPUSTATE_REALM_OFFSET := 0.
+Definition CPUSTATE_NS_OFFSET := 4096.
+Definition SCR_EL3_NS := 34017061.
+Definition SCR_EL3_REALM := 34017077.
+Definition SMC_RMM_REQ_COMPLETE	:= 3221225488. (* 0xc0000010 *)
+
+(* TODO *)
+
+Definition ADDRESS_BITS := 48.
+Definition ADDRESS_MASK := 281474976706560.
+Definition RTT_PAGE_LEVEL := 3.
+Definition STATUS_ERROR_ADDR_ALIGN := 3.
+Definition STATUS_ERROR_ADDR_BOUNDS := 4.
+Definition NOT_CNTx_CTL_IMASK := 18446744073709551613.
+Definition NOT_CNTHCTL_EL2_EL1PCTEN	:= 1024.
+
+Definition GRANULE_ALIGNED addr := addr mod GRANULE_SIZE =? 0.
+Definition PTE_TO_IPA_STATE pte := (Z.land pte 504403158265495552) / 72057594037927936.
+Definition IPA_STATE_TO_PTE ipa_state := ipa_state * 72057594037927936.
+Definition PTE_TO_PA pte := Z.land pte 281474976706560.
+
+Definition is_int n := (0 <=? n) && (n <=? 4294967295).
+Definition is_int64 n := (0 <=? n) && (n <=? 18446744073709551615).
+Definition is_gidx n := (1 <=? n) && (n <=? NR_GRANULES).
+
+Definition __addr_to_gidx addr := (addr - MEM0_PHYS) / GRANULE_SIZE + 1.
+Definition __gidx_to_addr gidx := MEM0_PHYS + (gidx - 1) * GRANULE_SIZE.
+
+Parameter __addr_to_idx: Z -> Z -> Z.
+Parameter __entry_is_table: Z -> bool.
+Parameter __entry_to_phys: Z -> Z -> Z.
+Parameter __mpidr_is_valid: Z -> bool.
+Parameter __mpidr_to_rec_idx: Z -> Z.
+Parameter __esr_srt: Z -> Z.
+Parameter __access_mask: Z -> Z.
+Parameter __esr_sign_extend: Z -> Z.
+Parameter __access_len: Z -> Z.
+Parameter __esr_sixty_four: Z -> bool.
+Parameter __find_next_set_bit_spec: Z -> Z -> Z.
+Parameter __esr_is_write: Z -> bool.
+Parameter __ESR_EL2_SYSREG_IS_WRITE : Z -> bool.
+Parameter __ESR_EL2_SYSREG_ISS_RT : Z -> Z.
+Parameter region_is_contained_: Z -> Z -> Z -> Z -> Z.
+Parameter rmm_handler: Z.
+
+Hint Unfold
+
+U64MAX
+
+STATUS_SUCCESS
+STATUS_ERROR_INPUT
+STATUS_ERROR_MEMORY
+STATUS_ERROR_ALIAS
+STATUS_ERROR_IN_USE
+STATUS_ERROR_REALM_STATE
+STATUS_ERROR_OWNER
+STATUS_ERROR_REC
+STATUS_ERROR_RTT_WALK
+STATUS_ERROR_RTT_ENTRY
+STATUS_ERROR_COUNT
+
+GRANULE_STATE_NS
+GRANULE_STATE_DELEGATED
+GRANULE_STATE_RD
+GRANULE_STATE_REC
+GRANULE_STATE_DATA
+GRANULE_STATE_TABLE
+GRANULE_STATE_REC_LIST
+
+SLOT_NS
+SLOT_DELEGATED
+SLOT_RD
+SLOT_REC
+SLOT_REC_TARGET
+SLOT_TABLE
+SLOT_REC_LIST
+SLOT_RTT2
+NR_CPU_SLOTS
+
+MEASUREMENT_ALGO_ZERO
+MEASUREMENT_ALGO_SHA256
+
+IPA_STATE_VACANT
+IPA_STATE_ABSENT
+IPA_STATE_PRESENT
+IPA_STATE_DESTROYED
+
+REALM_STATE_NEW
+REALM_STATE_ACTIVE
+
+MAP_NS
+UNMAP_NS
+
+GPI_NS
+GPI_REALM
+
+EL3_TO_NS
+EL3_TO_RMM
+
+MAX_NUM_RECS
+
+ESR_ABORT_MASK
+HANDLE_ID_SYSREG_MASK
+VTTBR_ADDR_MASK
+PSTATE_INIT
+MAX_ADDRESS
+NR_TABLE_LEVELS
+
+IPA_BITS
+IPA_SIZE
+IPA_MASK
+REC_CREATE_NR_GPRS
+REC_PARAMS_FLAG_RUNNABLE
+SZ_1K
+SZ_1M
+SZ_1G
+SZ_4K
+SZ_16K
+SZ_64K
+SZ_2G
+SZ_2M
+RMM_PHYS
+RMM_VIRT
+SLOT_VIRT
+UART0_VIRT
+UART0_PHYS
+MEM0_PHYS
+MEM0_SIZE
+ASC0_VIRT
+MEM1_PHYS
+MEM1_SIZE
+MAX_CPUS
+GRANULE_SIZE
+GRANULE_SHIFT
+GRANULE_MASK
+NOT_GRANULE_MASK
+NR_GRANULES
+HAS_MPAM
+DESC_TYPE_MASK
+PGTES_PER_TABLE
+BLOCK_L2_SIZE
+PGTE_S2_L012_TABLE
+PGTE_S2_L012_BLOCK
+PGTE_S2_L3_PAGE
+PGTE_S2_MEMATTR_FWB_NORMAL_WB
+PGTE_S2_AP_RW
+PGTE_S2_SH_IS
+PGTE_S2_AF
+PGTE_S2_XN
+PGTE_S2_NS
+PGTE_S2_ATTRS
+PGTE_S2_TABLE
+PGTE_S2_BLOCK
+PGTE_S2_PAGE
+PGTE_INVALID
+PGTE_S2_NS_ATTRS
+PTE_IPA_STATE_SHIFT
+PTE_IPA_STATE_MASK
+EXIT_REASON_RSI_DISPOSE
+REC_RUN_HVC_NR_GPRS
+RVIC_BITMAP_BYTES
+RVIC_BITMAP_ULS
+BITS_PER_UL
+PSCI_RETURN_SUCCESS
+PSCI_RETURN_NOT_SUPPORTED
+PSCI_RETURN_INVALID_PARAMS
+PSCI_RETURN_DENIED
+PSCI_RETURN_ALREADY_ON
+PSCI_RETURN_ON_PENDING
+PSCI_RETURN_INTERNAL_FAILURE
+PSCI_RETURN_NOT_PRESENT
+PSCI_RETURN_DISABLED
+PSCI_RETURN_INVALID_ADDRESS
+SPSR_EL2_MODE_SHIFT
+SPSR_EL2_MODE_WIDTH
+SPSR_EL2_MODE_EL0t
+SPSR_EL2_MODE_EL1h
+SPSR_EL2_nRW_SHIFT
+SPSR_EL2_nRW_WIDTH
+SPSR_EL2_nRW_AARCH64
+SPSR_EL2_nRW_AARCH32
+SPSR_EL2_F_SHIFT
+SPSR_EL2_F_WIDTH
+SPSR_EL2_F_BIT
+SPSR_EL2_I_SHIFT
+SPSR_EL2_I_WIDTH
+SPSR_EL2_I_BIT
+SPSR_EL2_A_SHIFT
+SPSR_EL2_A_WIDTH
+SPSR_EL2_A_BIT
+SPSR_EL2_D_SHIFT
+SPSR_EL2_D_WIDTH
+SPSR_EL2_D_BIT
+SPSR_EL2_SSBS_SHIFT
+SPSR_EL2_SSBS_WIDTH
+SPSR_EL2_SSBS_BIT
+SPSR_EL2_IL_SHIFT
+SPSR_EL2_IL_WIDTH
+SPSR_EL2_IL_BIT
+SPSR_EL2_SS_SHIFT
+SPSR_EL2_SS_WIDTH
+SPSR_EL2_SS_BIT
+SPSR_EL2_PAN_SHIFT
+SPSR_EL2_PAN_WIDTH
+SPSR_EL2_PAN_BIT
+SPSR_EL2_UAO_SHIFT
+SPSR_EL2_UAO_WIDTH
+SPSR_EL2_UAO_BIT
+SPSR_EL2_V_SHIFT
+SPSR_EL2_V_WIDTH
+SPSR_EL2_V_BIT
+SPSR_EL2_C_SHIFT
+SPSR_EL2_C_WIDTH
+SPSR_EL2_C_BIT
+SPSR_EL2_Z_SHIFT
+SPSR_EL2_Z_WIDTH
+SPSR_EL2_Z_BIT
+SPSR_EL2_N_SHIFT
+SPSR_EL2_N_WIDTH
+SPSR_EL2_N_BIT
+SCTLR_EL1_EE
+SCTLR_EL1_SPAN
+SCTLR_EL1_EIS
+SCTLR_EL1_nTWE
+SCTLR_EL1_nTWI
+SCTLR_EL1_EOS
+SCTLR_EL1_nAA
+SCTLR_EL1_CP15BEN
+SCTLR_EL1_SA0
+SCTLR_EL1_SA
+SCTLR_EL1_FLAGS
+SMC32_PSCI_BASE
+SMC64_PSCI_BASE
+SMC32_PSCI_VERSION
+SMC32_PSCI_CPU_SUSPEND
+SMC64_PSCI_CPU_SUSPEND
+SMC32_PSCI_CPU_OFF
+SMC32_PSCI_CPU_ON
+SMC64_PSCI_CPU_ON
+SMC32_PSCI_AFFINITY_INFO
+SMC64_PSCI_AFFINITY_INFO
+SMC32_PSCI_SYSTEM_OFF
+SMC32_PSCI_SYSTEM_RESET
+SMC32_PSCI_FEATURES
+SMC32_PSCI_MAX
+SMC64_PSCI_MAX
+RVIC_INFO_KEY_NR_TRUSTED_INTERRUPTS
+RVIC_INFO_KEY_NR_UNTRUSTED_INTERRUPTS
+RVIC_STATUS_SUCCESS
+RVIC_STATUS_ERROR_PARAMETER
+RVIC_STATUS_INVALID_CPU
+RVIC_STATUS_DISABLED
+RVIC_STATUS_NO_INTERRUPT
+NR_TRUSTED_INTERRUPTS
+NR_UNTRUSTED_INTERRUPTS
+NR_INTERRUPTS
+INTID_TRUSTED_BASE
+INTID_TRUSTED_MAX
+INTID_UNTRUSTED_BASE
+INTID_UNTRUSTED_MAX
+INTID_SPURIOUS
+INTID_VTIMER_EL1
+INTID_PTIMER_EL1
+MPIDR_EL1_AFF_MASK
+MPIDR_EL1_AFF0_SHIFT
+MPIDR_EL1_AFF1_SHIFT
+MPIDR_EL1_AFF2_SHIFT
+MPIDR_EL1_AFF3_SHIFT
+MPIDR_EL1_AFF0
+MPIDR_EL1_AFF1
+MPIDR_EL1_AFF2
+MPIDR_EL1_AFF3
+SMC64_RVIC_BASE
+SMC64_RVIC_VERSION
+SMC64_RVIC_INFO
+SMC64_RVIC_ENABLE
+SMC64_RVIC_DISABLE
+SMC64_RVIC_SET_MASKED
+SMC64_RVIC_CLEAR_MASKED
+SMC64_RVIC_IS_PENDING
+SMC64_RVIC_SIGNAL
+SMC64_RVIC_CLEAR_PENDING
+SMC64_RVIC_ACKNOWLEDGE
+SMC64_RVIC_RESAMPLE
+SMC64_RVIC_MAX
+SMC_RETURN_UNKNOWN_FUNCTION
+PMCR_EL0_RES1
+MDSCR_EL1_TDCC_BIT
+CNTHCTL_EL2_NO_TRAPS
+HCR_FLAGS
+VTCR_FLAGS
+ESR_EL2_EC_MASK
+ESR_EL2_EC_DATA_ABORT
+ESR_EL2_ABORT_ISV_BIT
+NOT_ESR_EL2_ABORT_ISV_BIT
+ESR_EL2_EC_HVC
+CNTx_CTL_ENABLE
+CNTx_CTL_IMASK
+CNTx_CTL_ISTATUS
+CNTHCTL_EL2_EL1PCTEN
+CNTHCTL_EL2_EL1PTEN
+NOT_CNTHCTL_EL2_EL1PTEN
+CNTHCTL_EL2_EL1TVT
+NOT_CNTHCTL_EL2_EL1TVT
+CNTHCTL_EL2_EL1TVCT
+HCR_FB
+HCR_VI
+NOT_HCR_VI
+HCR_AMO
+HCR_IMO
+HCR_FMO
+HCR_PTW
+HCR_SWIO
+HCR_VM
+ICC_SRE_EL2_ENABLE
+NOT_ICC_SRE_EL2_ENABLE
+ESR_EL2_ABORT_FSC_MASK
+ESR_EL2_ABORT_SAS_MASK
+ESR_EL2_ABORT_FNV_BIT
+ESR_EL2_ABORT_WNR_BIT
+ESR_EL2_ABORT_FSC_LEVEL_MASK
+NOT_ESR_EL2_ABORT_FSC_LEVEL_MASK
+ESR_EL2_ABORT_FSC_PERMISSION_FAULT
+ESR_EL2_ABORT_FSC_TRANSLATION_FAULT
+HPFAR_EL2_FIPA_MASK
+HPFAR_EL2_FIPA_OFFSET
+SMC_RSI_ABI_VERSION
+RSI_ABI_VERSION
+SMC_RSI_MEMORY_DISPOSE
+EXIT_REASON_REC_INTERRUPT_PENDING
+EXIT_REASON_PSCI
+ESR_EL2_EC_WFX
+ESR_EL2_WFx_TI_BIT
+ESR_EL2_xVC_IMM_MASK
+ESR_EL2_EC_SMC
+ESR_EL2_EC_SYSREG
+ESR_EL2_EC_INST_ABORT
+ICC_HPPIR1_EL1_INTID
+EXIT_REASON_IRQ
+ESR_EL2_SYSREG_ID_MASK
+ESR_EL2_SYSREG_ID
+ESR_EL2_SYSREG_TIMERS_MASK
+ESR_EL2_SYSREG_TIMERS
+ESR_EL2_SYSREG_ICC_EL1_MASK
+ESR_EL2_SYSREG_ICC_EL1
+ESR_EL2_IL_MASK
+ARM_EXCEPTION_SYNC_LEL
+EXIT_REASON_SYNC
+ARM_EXCEPTION_IRQ_LEL
+ARM_EXCEPTION_FIQ_LEL
+EXIT_REASON_FIQ
+RMI_ABI_VERSION
+ESR_EL2_SYSREG_MASK
+ESR_EL2_SYSREG_ID_AA64ISAR1_EL1
+ESR_EL2_SYSREG_DIRECTION
+ESR_EL2_SYSREG_TIMER_CNTV_TVAL_EL0
+ESR_EL2_SYSREG_TIMER_CNTV_CTL_EL0
+ESR_EL2_SYSREG_TIMER_CNTV_CVAL_EL0
+ESR_EL2_SYSREG_TIMER_CNTP_TVAL_EL0
+ESR_EL2_SYSREG_TIMER_CNTP_CTL_EL0
+ESR_EL2_SYSREG_TIMER_CNTP_CVAL_EL0
+SMC_RETURN_OK
+SMC_ASC_RETURN_ERR_ADDRESS
+SMC_ASC_RETURN_ERR_PAS
+SMC_ASC_MARK_REALM
+SMC_ASC_MARK_NONSECURE
+x0
+x1
+x2
+x3
+x4
+x5
+x6
+x7
+x8
+x9
+x10
+x11
+x12
+x13
+x14
+x15
+x16
+x17
+x18
+x19
+x20
+x21
+x22
+x23
+x24
+x25
+x26
+x27
+x28
+x29
+x30
+lr
+cntp_ctl_el0
+cntp_cval_el0
+cntp_tval_el0
+cntv_ctl_el0
+cntv_cval_el0
+cntv_tval_el0
+sp_el0
+pmcr_el0
+pmuserenr_el0
+tpidrro_el0
+tpidr_el0
+sp_el1
+elr_el1
+spsr_el1
+csselr_el1
+sctlr_el1
+actlr_el1
+cpacr_el1
+zcr_el1
+ttbr0_el1
+ttbr1_el1
+tcr_el1
+esr_el1
+afsr0_el1
+afsr1_el1
+far_el1
+mair_el1
+vbar_el1
+contextidr_el1
+tpidr_el1
+amair_el1
+cntkctl_el1
+par_el1
+mdscr_el1
+mdccint_el1
+disr_el1
+mpam0_el1
+cnthctl_el2
+cntvoff_el2
+cntpoff_el2
+vmpidr_el2
+vttbr_el2
+vtcr_el2
+hcr_el2
+actlr_el2
+afsr0_el2
+afsr1_el2
+amair_el2
+cptr_el2
+elr_el2
+esr_el2
+far_el2
+hacr_el2
+hpfar_el2
+hstr_el2
+mair_el2
+mpam_el2
+mpamhcr_el2
+pmscr_el2
+sctlr_el2
+scxtnum_el2
+sp_el2
+spsr_el2
+tcr_el2
+tfsr_el2
+tpidr_el2
+trfcr_el2
+ttbr0_el2
+ttbr1_el2
+vbar_el2
+vdisr_el2
+vncr_el2
+vpidr_el2
+vsesr_el2
+vstcr_el2
+vsttbr_el2
+zcr_el2
+icc_sre_el2
+ICC_HPPIR1_EL1
+spsr_el3
+elr_el3
+tpidr_el3
+esr_el3
+scr_el3
+elr_el12
+sctlr_el12
+spsr_el12
+cpacr_el12
+ttbr0_el12
+ttbr1_el12
+tcr_el12
+esr_el12
+afsr0_el12
+afsr1_el12
+far_el12
+mair_el12
+vbar_el12
+contextidr_el12
+amair_el12
+cntkctl_el12
+MPAM0_EL1
+cntp_cval_el02
+cntv_cval_el02
+cntv_ctl_el02
+cntp_ctl_el02
+cntv_tval_el02
+cntp_tval_el02
+ICC_SRE_EL2
+
+ESR_EC
+ESR_EC_SMC
+ESR_EC_SMC_IMM16
+SMC_STD_CALL_MASK
+NOT_SMC_STD_CALL_MASK
+SMC_STD_CALL_BASE
+SMC_ARM_ARCH_CALL_MASK
+NOT_SMC_ARM_ARCH_CALL_MASK
+SMC_ARM_ARCH_CALL_BASE
+SMC_ASC_MARK_SECURE
+SCR_WORLD_MASK
+SCR_REALM_WORLD
+SCR_NS_WORLD
+CPUSTATE_REALM_OFFSET
+CPUSTATE_NS_OFFSET
+SCR_EL3_NS
+SCR_EL3_REALM
+SMC_RMM_REQ_COMPLETE
+
+
+
+ADDRESS_BITS
+ADDRESS_MASK
+RTT_PAGE_LEVEL
+STATUS_ERROR_ADDR_ALIGN
+STATUS_ERROR_ADDR_BOUNDS
+NOT_CNTx_CTL_IMASK
+NOT_CNTHCTL_EL2_EL1PCTEN
+
+GRANULE_ALIGNED
+PTE_TO_IPA_STATE
+IPA_STATE_TO_PTE
+PTE_TO_PA
+
+is_int
+is_int64
+is_gidx.

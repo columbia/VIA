@@ -1,0 +1,19 @@
+DIGEST fa5ba3bc2f2b83c8702b9cd959642a15
+FRMM.Assembly.AsmProof2
+R15:20 compcert.lib.Coqlib <> <> lib
+R38:40 compcert.common.AST <> <> lib
+R58:65 compcert.lib.Integers <> <> lib
+R83:91 compcert.common.Smallstep <> <> lib
+R109:114 compcert.common.Events <> <> lib
+R132:141 compcert.common.Globalenvs <> <> lib
+R159:164 compcert.common.Memory <> <> lib
+R182:187 compcert.common.Values <> <> lib
+R205:213 RMM.Constants <> <> lib
+R231:235 RMM.RData <> <> lib
+R253:255 RMM.Assembly.Asm <> <> lib
+R273:279 RMM.Assembly.AsmCode <> <> lib
+R297:305 RMM.CommonLib <> <> lib
+R323:332 RMM.RefTactics <> <> lib
+R350:361 RMM.Assembly.Asm <> <> lib
+R379:394 RMM.Assembly.AsmCode <> <> lib
+R412:427 RMM.Assembly.AsmSpec <> <> lib

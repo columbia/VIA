@@ -1,0 +1,4 @@
+Require Export RealmTimerHandler.Specs.handle_vtimer_sysreg_write.
+Require Export RealmTimerHandler.Specs.handle_ptimer_sysreg_write.
+Require Export RealmTimerHandler.Specs.handle_vtimer_sysreg_read.
+Require Export RealmTimerHandler.Specs.handle_ptimer_sysreg_read.
