@@ -1,6 +1,6 @@
 # Design and Verification of the Arm Confidential Compute Architecture
 
-This artifact includes the mechanized Coq proofs for the security of RMM/EL3M, the verified software stack for ACCA. It also provides instructions on running the performance evaluations of CCA KVM.
+This artifact includes the mechanized Coq proofs for the security of RMM/EL3M, the verified software stack for the Arm Confidential Compute Architecture (CCA). It also provides instructions on running the performance evaluations of CCA KVM.
 
 # Table of Contents
 
@@ -116,14 +116,11 @@ Above the top layer [RMMHandler](proof/RMMHandler/), we compose the final securi
 ### 2.0 Prelogue
 
 **Evaluation Platform**
-Since the hardware support for ACCA is not avaiable yet, we provide an Arm Neoverse N1 System Development Platform (N1SDP) that runs modified RMM and 
+Since the hardware support for CCA is not avaiable yet, we provide an Arm Neoverse N1 System Development Platform (N1SDP) that runs a modified RMM and 
 Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performance. We provide remote access for you to run benchmarks on the N1SDP.
 
 **Evaluation Tools**
-Due to legal issues, we cannot modify QEMU and make it support CCA KVM for performance evaluation by the time we submitted the paper. Therefore we use
-kvmtool instead. For now, We have made QEMU support CCA KVM and we will report the new benchmark results here(**Figure 1**).
-
-We also changed the client machine for the network benchmarks in order to make this artifact evaluation available to the reviwers so the kvmtool results may also change.
+There are two main changes to our testbed from the original evaluation in the submitted paper.  First, due to legal issues, the original evaluation in the submitted paper was done using kvmtool as the required modifications to QEMU to use CCA were not possible then.  However, kvmtool is less mature than QEMU, and since then we have been able to make the required changes to QEMU for the evaluation, so we have updated the evaluation based on QEMU. Second, we changed the client machine for the network benchmarks to make this artifact evaluation available to the reviewers as the original setup was not remotely accessible.  The new benchmark results based on the current setup that we plan to report are shown here (**Figure 1**).
 
 | ![qemu-bench.png](figures/qemu-bench.png) |
 |:--:|
@@ -223,7 +220,7 @@ If the system boots successfully, a GRUB menu should show up shortly after the P
 
 ### 2.4 Running the VM and Benchmarks
 
-Due to license contraints, we are not able to provide the source code of ACCA software stacks for you to compile and install on the N1SDP.
+Due to license constraints, we are not able to provide the source code of CCA software stacks for you to compile and install on the N1SDP.
 They are preinstalled on the N1SDP, including modified RMM, TF-A, CCA KVM and CCA QEMU, for running the benchmarks.
 
 RMM and TF-A are automatically loaded from the board when the machine powered up and the kernel will be loaded by GRUB.
