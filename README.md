@@ -166,7 +166,7 @@ There are two main changes to our testbed from the original evaluation in the su
     </td>
   </tr>
   <tr>
-    <th colspan="2">Table 1. Application benchmarks.</td>
+    <th colspan="2">Table 1: Application benchmarks.</td>
   </tr>
 </tbody>
 </table>
