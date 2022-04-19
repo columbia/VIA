@@ -242,13 +242,12 @@ Make sure you choose the entry `Ubuntu N1SDP realm` in the GRUB menu. After the 
 
 ```
 ssh ae@192.168.11.10
-password: ae
 ```
 
 After you loged in, you can run:
 
 ```
-./net.sh
+sudo ./net.sh
 ```
 
 to configure the bridged network for the VM.
@@ -256,8 +255,11 @@ to configure the bridged network for the VM.
 We provide scripts for different VM configurations:
 
 ```
-run-kvm.sh.           # Run Vanilla KVM
-run-cca.sh            # Run CCA KVM
+run-qemu-kvm.sh            # Run vanilla KVM using QEMU
+run-qemu-cca.sh            # Run CCA KVM using QEMU
+run-kvmtool-kvm.sh         # Run vanilla KVM using kvmtool
+run-kvmtool-cca.sh         # Run CCA KVM using kvmtool
+
 ```
 
 You can use the following command to run the VM using vanilla KVM and 2 vCPUs:
@@ -268,11 +270,14 @@ You can use the following command to run the VM using vanilla KVM and 2 vCPUs:
 
 You can replace `apache` with `hack`, `kern`, `memcached`, `mysql`, `mongo` or `redis` for different workloads.
 
-After you run the command, QEMU will wait for the vCPUs being pinned to proceed. To pin the vCPUs, login to the N1SDP on a different shell and run:
+If you use QEMU, after you run the command, QEMU will wait for the vCPUs being pinned to proceed. To pin the vCPUs, login to the N1SDP on a different
+shell and run:
 
 ```
 ./pin_vcpu.sh
 ```
+
+If you use kvmtool, the vCPUs are automatically pinned.
 
 Once the vCPUs are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
 scripts on the jump host. We will cover this in the next section.
