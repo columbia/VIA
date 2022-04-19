@@ -120,7 +120,56 @@ Since the hardware support for CCA is not avaiable yet, we provide an Arm Neover
 Trusted Firmware-A (TF-A) as EL3M to get a preliminary measure of CCA performance. We provide remote access for you to run benchmarks on the N1SDP.
 
 **Evaluation Tools**
-There are two main changes to our testbed from the original evaluation in the submitted paper.  First, due to legal issues, the original evaluation in the submitted paper was done using kvmtool as the required modifications to QEMU to use CCA were not possible then.  However, kvmtool is less mature than QEMU, and since then we have been able to make the required changes to QEMU for the evaluation, so we have updated the evaluation based on QEMU. Second, we changed the client machine for the network benchmarks to make this artifact evaluation available to the reviewers as the original setup was not remotely accessible.  The new benchmark results based on the current setup that we plan to report are shown here (**Figure 1**).
+There are two main changes to our testbed from the original evaluation in the submitted paper.  First, due to legal issues, the original evaluation in the submitted paper was done using kvmtool as the required modifications to QEMU to use CCA were not possible then.  However, kvmtool is less mature than QEMU, and since then we have been able to make the required changes to QEMU for the evaluation, so we have updated the evaluation based on QEMU. Second, we changed the client machine for the network benchmarks to make this artifact evaluation available to the reviewers as the original setup was not remotely accessible.  The new benchmark workloads and results based on the current setup that we plan to report are shown here
+ (**Table 1** and **Figure 1**).
+ 
+ <table>
+<thead>
+  <tr>
+    <th>Name</th>
+    <th>Description</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>Apache</td>
+    <td>Apache server v2.4.41 handling 100 concurrent requests via TLS/SSL from remote ApacheBench v2.3 client,
+      serving the index.html of the GCC 7.5.0 manual.
+    </td>
+  </tr>
+  <tr>
+    <td>Hackbench</td>
+    <td>Hackbench using Unix domain sockets and 20 process groups running in 500 loops.</td>
+  </tr>
+  <tr>
+    <td>Kernbench</td>
+    <td>Compilation of the Linux kernel v4.18 using allnoconfig for Arm with GCC 9.3.0.</td>
+  </tr>
+  <tr>
+    <td>Memcached</td>
+    <td>Memcached v1.5.22 handling requests from a remote memtier benchmark v1.2.11 with the default parameters.</td>
+  </tr>
+  <tr>
+    <td>MongoDB</td>
+    <td>MongoDB server v3.6.8 handling requests from a remote YCSB v0.17.0 client running workload A with 16 concurrent threads and
+      operationcount=500000.
+    </td>
+  </tr>
+  <tr>
+    <td>MySQL</td>
+    <td>MySQL v8.0.27 running sysbench v1.0.11 with 32 concurrent threads and TLS encryption.</td>
+  </tr>
+  <tr>
+    <td>Redis</td>
+    <td>Redis v4.0.9 server handling requests from a remote redis-benchmark in redis-tools v5.0.7 running <code>GET</code>/<code>SET</code>
+      with 50 parallel connections and 12 pipelined requests.
+    </td>
+  </tr>
+  <tr>
+    <th colspan="2">Table 1. Application benchmarks.</td>
+  </tr>
+</tbody>
+</table>
 
 | ![qemu-bench.png](figures/qemu-bench.png) |
 |:--:|
