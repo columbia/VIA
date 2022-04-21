@@ -95,7 +95,8 @@ The definition of the machine states shared by all layers is in [RData](proof/RD
 
 - Mover Oracle related definitions can be found in [MoverTypes](proof/MoverTypes.v). The proof that refines page table operations into atomic specifications can be found in the consecutive layers [TableDataOpsRef1](proof/TableDataOpsRef1/), [TableDataOpsRef2](proof/TableDataOpsRef2/), [TableDataOpsRef3](proof/TableDataOpsRef3/).
 
-- Most permutation conditions are checked during layer refinement proof, except for MEMORY-ISOLATION condition which is one of the invariant checked in security proof below.
+- The proof lifting relaxed memory model to sequentially consistent model can be found in [RelaxedMemory](proof/RelaxedMemory/).
+  The permutation condition proof in Section 4.2 is in [PermCondition](proof/RmiSMC/RefProof/PermCondition.v).
 
 - Assembly code related definitions and proofs are in [Assembly](proof/Assembly/), including:
   - Assembly language semantics definition [Asm](proof/Assembly/Asm.v)

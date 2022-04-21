@@ -88,7 +88,18 @@ endif
 #                    #
 ######################
 
-VFILES:=proof/RmiSMC/RefProof/PermCondition.v\
+VFILES:=proof/RelaxedMemory/weakenedWDRF/PageTable.v\
+  proof/RelaxedMemory/weakenedWDRF/Proof.v\
+  proof/RelaxedMemory/weakenedWDRF/SC.v\
+  proof/RelaxedMemory/weakenedWDRF/DRF.v\
+  proof/RelaxedMemory/weakenedWDRF/Promising.v\
+  proof/RelaxedMemory/weakenedWDRF/Base.v\
+  proof/RelaxedMemory/WDRF/Proof.v\
+  proof/RelaxedMemory/WDRF/SC.v\
+  proof/RelaxedMemory/WDRF/DRF.v\
+  proof/RelaxedMemory/WDRF/Promising.v\
+  proof/RelaxedMemory/WDRF/Base.v\
+  proof/RmiSMC/RefProof/PermCondition.v\
   proof/Security/SecureProofRMM2.v\
   proof/Security/SecureProofRMM1.v\
   proof/Security/SecureProofUser.v\
