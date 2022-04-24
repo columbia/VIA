@@ -408,6 +408,7 @@ The results will be saved to the corresponding `[bench].txt` and you can get the
 ### 2.4.2 Epilogue
 
 After finishing the benchmark for a VM, please gently shutdown the VM by running `halt -p` on the VM to prevent VM disk image corruption.
+Similarly, to reboot the host, please first run `sudo halt -p` on the host and after `ttyUSB1` shows `reboot: Power down`, enter `reboot` on `ttyUSB0` to power cycle the machine.
 
 Since RMM shares the same virtual address space with the Linux kernel on this Arm v8 machine, you may encounter unstability when running CCA KVM due
 to insufficient TLB management. This problem can be solved on the Arm v9 platform but for this artifact evaluation, if you see erroneous behaviors of
