@@ -291,7 +291,7 @@ Ubuntu N1SDP - SMP benchmark      # Linux v5.12 kernel, passed with cmdline mem=
 Make sure you choose the entry `Ubuntu N1SDP realm` in the GRUB menu. After the login interface prompts, you can ssh to the N1SDP from the jump host:
 
 ```
-ssh ae@192.168.11.10
+ssh 192.168.11.10
 ```
 
 After you loged in, you can run:
@@ -307,15 +307,12 @@ We provide scripts for different VM configurations:
 ```
 run-qemu-kvm.sh            # Run vanilla KVM using QEMU
 run-qemu-cca.sh            # Run CCA KVM using QEMU
-run-kvmtool-kvm.sh         # Run vanilla KVM using kvmtool
-run-kvmtool-cca.sh         # Run CCA KVM using kvmtool
-
 ```
 
 You can use the following command to run the VM using vanilla KVM and 2 vCPUs:
 
 ```
-./run-kvm.sh apache
+./run-qemu-kvm.sh apache
 ```
 
 You can replace `apache` with `hack`, `kern`, `memcached`, `mysql`, `mongo` or `redis` for different workloads.
@@ -327,14 +324,12 @@ shell and run:
 ./pin_vcpu.sh
 ```
 
-If you use kvmtool, the vCPUs are automatically pinned.
-
 Once the vCPUs are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
 scripts on the jump host. We will cover this in the next section.
 
 You can login to the VM either through the VM serial port or using ssh. The username and password for the VM are both `root`:
 ```
-ssh -o StrictHostKeyChecking=no -o StrictHostKeyChecking=no root@192.168.11.11
+ssh -o StrictHostKeyChecking=no -o StrictHostKeyChecking=no 192.168.11.11
 ```
 
 Note that `-o StrictHostKeyChecking=no -o StrictHostKeyChecking=no` is required for ssh'ing to the VM because all VM is configured to use the same IP
@@ -384,20 +379,6 @@ You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for exa
 `[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
 
 `IP` is `192.168.11.10` for native execution and `192.168.11.11` for the VM.
-
-For Hackbench and Kernbench:
-
-```
-# VM benchmarks
-./[hack|kern].sh root@192.168.11.11
-password: root
-
-# Bare metal benchmarks
-./[hack|kern].sh ae@192.168.11.10
-password: ae
-```
-
-After each iteration is done, you will need to enter the password to download the results from the VM/N1SDP.
 
 The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
 
