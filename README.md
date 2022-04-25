@@ -373,7 +373,7 @@ You don't need any service for Hackbench or Kernbench.
 You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for example:
 
 ```
-./apache.sh 192.168.10.11
+./apache.sh 192.168.11.11
 ```
 
 `[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
