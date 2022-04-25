@@ -275,7 +275,7 @@ They are preinstalled on the N1SDP, including modified RMM, TF-A, CCA KVM and CC
 
 RMM and TF-A are automatically loaded from the board when the machine powered up and the kernel will be loaded by GRUB.
 
-#### 2.4.1 Choosing the Kernel
+### 2.4.1 Choosing the Kernel
 
 In the GRUB menu, you should see four (4) entries as explained below:
 
@@ -335,14 +335,26 @@ ssh -o StrictHostKeyChecking=no -o StrictHostKeyChecking=no 192.168.11.11
 Note that `-o StrictHostKeyChecking=no -o StrictHostKeyChecking=no` is required for ssh'ing to the VM because all VM is configured to use the same IP
 address but they have different ECDSA keys.
 
-### 2.4.2 Running the Benchmarks
-
-**VM Benchmarks**
+### 2.4.3 Running the Benchmarks on the VM
 
 To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`) before launching the VM.
 If the network of the VM is configured correctly, its IP address should be `192.168.11.11`. You can use `ip addr` on the VM to check it out.
 
-**Bare Metal Benchmarks**
+You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for example:
+
+```
+./apache.sh 192.168.11.11
+```
+
+`[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
+
+The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
+
+```
+./avg [bench].txt
+```
+
+### 2.4.4 Running the Benchmarks on the baremetal
 
 To run benchmarks on the bare metal, make sure you select the correct kernel (see [Choose the Kernel](#241-choosing-the-kernel)). The bare metal host
 is configured with IP address `192.168.11.10`.
@@ -364,27 +376,18 @@ MongoDB       | `sudo systemctl start mongodb.service`
 MySQL         | `sudo systemctl start mysql.service`
 Redis         | `sudo systemctl start redis-server.service`
 
-You can use `systemctl status service-name` to see if the server is up.
+You can use `systemctl status service-name` to see if the server is up. It is recommended to only start one(1) service at a time for the performance
+evaluation to avoid the interference from other services.
 
 You don't need any service for Hackbench or Kernbench.
-
-**Using the Benchmark Scripts**
 
 You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for example:
 
 ```
-./apache.sh 192.168.11.11
+./apache.sh 192.168.11.10
 ```
 
 `[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
-
-`IP` is `192.168.11.10` for native execution and `192.168.11.11` for the VM.
-
-The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
-
-```
-./avg [bench].txt
-```
 
 ### 2.4.2 Epilogue
 
