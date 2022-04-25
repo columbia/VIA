@@ -178,7 +178,7 @@ There are two main changes to our testbed from the original evaluation in the su
 
 ### 2.1 Prerequisites
 
-***NOTE: Since we only have one N1SDP for performance benchmarks, multiple reviewers may connect to the jump host but only one can do the evaluation at a time. If you are not able to open the ttyUSB(see instructions below), please wait the other reviwer finishing the evaluation. Sorry about the inconvenience.***
+***NOTE: Since we only have one N1SDP for performance benchmarks, multiple reviewers may connect to the jump host but only one can do the evaluation at a time. If you are not able to open the ttyUSB(see instructions below), please wait for the other reviewer to finish the evaluation. Sorry about the inconvenience.***
 
 #### 2.1.1 Connecting to the Jump Host
 
@@ -428,5 +428,5 @@ to insufficient TLB management. This problem can be solved on the Arm v9 platfor
 the machine, such as VM crashing or siginificant outlaying benchmark data, please reboot the N1SDP. We suggest you run CCA KVM on a fresh reboot for
 every benchmark.
 
-After you finish all performance evaluations, please kindly close all opened USBttys from the jump host so the following reviwers can proceed their
-evalutions.
+After you finish all performance evaluations, please kindly close all opened USBttys from the jump host so the following reviewers can proceed their
+evaluations.
