@@ -184,7 +184,7 @@ The N1SDP is connected to a jump host with two Intel Xeon E5-2690 8 cores CPUs v
 run network benchmarks from the jump host as the client.
 
 
-| ![qemu-bench.png](figures/topo.png) |
+| ![qemu-bench.png](figures/topo.jpg) |
 |:--:|
 | **Fig 2: Topology of the N1SDP and jump host.** |
 
