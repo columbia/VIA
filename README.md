@@ -282,13 +282,13 @@ In the GRUB menu, you should see four (4) entries as explained below:
 ```
 Ubuntu                            # DO NOT USE, Ubuntu stock kernel, incompatible with ACCA
 Advanced options for Ubuntu       # DO NOT USE, Ubuntu stock kernel, incompatible with ACCA
-Ubuntu N1SDP realm                # Linux v5.12 kernel modified for ACCA, used for VM benchmarks
+Ubuntu N1SDP realm - QEMU         # Linux v5.12 kernel modified for ACCA, used for VM benchmarks
 Ubuntu N1SDP - SMP benchmark      # Linux v5.12 kernel, passed with cmdline mem=512m for baseline SMP native benchmarks
 ```
 
 ### 2.4.2 Running the VM
 
-Make sure you choose the entry `Ubuntu N1SDP realm` in the GRUB menu. After the login interface prompts, you can ssh to the N1SDP from the jump host:
+Make sure you choose the entry `Ubuntu N1SDP realm - QEMU` in the GRUB menu. After the login interface prompts, you can ssh to the N1SDP from the jump host:
 
 ```
 ssh 192.168.11.10
