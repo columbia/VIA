@@ -178,6 +178,8 @@ There are two main changes to our testbed from the original evaluation in the su
 
 ### 2.1 Prerequisites
 
+***NOTE: Since we only have one N1SDP for performance benchmarks, multiple reviewers may connect to the jump host but only one can do the evaluation at a time. If you are not able to open the ttyUSB(see instructions below), please wait the other reviwer finishing the evaluation. Sorry about the inconvenience.***
+
 #### 2.1.1 Connecting to the Jump Host
 
 The N1SDP is connected to a jump host with two Intel Xeon E5-2690 8 cores CPUs via a 1Gbps switch. You can use the jump host to access the N1SDP and
