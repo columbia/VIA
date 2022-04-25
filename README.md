@@ -217,7 +217,7 @@ screen /dev/ttyUSB1 115200
 #### 2.2.1 GNU Screen 101
 
 Below is a simple instruction for GNU Screen. You may refer to the manual page for more information.
-If you are familiar with the GNU Screen, you can go ahead to [Boot the N1SDP](#23-boot-the-n1sdp).
+If you are familiar with the GNU Screen, you can go ahead to [Boot the N1SDP](#23-booting-the-n1sdp).
 
 You can use `Ctrl-a` `c` to create a new window in the current session and open the other serial port:
 
@@ -344,8 +344,8 @@ If the network of the VM is configured correctly, its IP address should be `192.
 
 **Bare Metal Benchmarks**
 
-To run benchmarks on the bare metal, make sure you select the correct kernel (see [Choose the Kernel](#241-choose-the-kernel)). The bare metal host is
-configured with IP address `192.168.11.10`.
+To run benchmarks on the bare metal, make sure you select the correct kernel (see [Choose the Kernel](#241-choosing-the-kernel)). The bare metal host
+is configured with IP address `192.168.11.10`.
 
 You have to login to the N1SDP and start the correpsonding server program. For a more accurate performance measurement, you may want to only start one
 server program at once. All of them can be enabled/disabled by `systemctl`:
