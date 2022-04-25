@@ -20,7 +20,7 @@ We use `opam` to install Coq and other dependencies. To install `opam`:
   ```
 Then, initialize `opam` with the specific version `4.02.0`:
   ```
-  opam init compiler 4.02.0
+  opam init --compiler 4.02.0
   ```
 If you already have `opam` installed which has a different version, switch to `4.02.0`:
   ```
