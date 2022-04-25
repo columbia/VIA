@@ -183,9 +183,13 @@ There are two main changes to our testbed from the original evaluation in the su
 The N1SDP is connected to a jump host with two Intel Xeon E5-2690 8 cores CPUs via a 1Gbps switch. You can use the jump host to access the N1SDP and
 run network benchmarks from the jump host as the client.
 
+
+| ![qemu-bench.png](figures/topo.png) |
+|:--:|
+| **Fig 2: Topology of the N1SDP and jump host.** |
+
 Send an email to [osdi22paper196ae@gmail.com](mailto:osdi22paper196ae@gmail.com) with the subject "OSDI AE" and your ssh public key in the content so 
 we can register you to the server and send you instructions on connecting to it.
-
 
 #### 2.1.2 Setup the Jump Host
 
@@ -275,7 +279,7 @@ They are preinstalled on the N1SDP, including modified RMM, TF-A, CCA KVM and CC
 
 RMM and TF-A are automatically loaded from the board when the machine powered up and the kernel will be loaded by GRUB.
 
-### 2.4.1 Choosing the Kernel
+#### 2.4.1 Choosing the Kernel
 
 In the GRUB menu, you should see four (4) entries as explained below:
 
@@ -286,7 +290,26 @@ Ubuntu N1SDP realm - QEMU         # Linux v5.12 kernel modified for ACCA, used f
 Ubuntu N1SDP - SMP benchmark      # Linux v5.12 kernel, passed with cmdline mem=512m for baseline SMP native benchmarks
 ```
 
-### 2.4.2 Running the VM
+***Here's a quick summary for running the benchmarks, in case you get lost in the upcoming instructions:***
+
+You will need five(5) GNU screen windows(W0 - W4) on the jump host to run the benchmarks.
+
+- W0 and W1 are used for the serial ports.
+- W2 is in the `osdi-paper196-ae/client` directory.
+- W3 opens an ssh session to the N1SDP and launchs the the VM using `./run-qemu-kvm.sh [bench]` or `./run-qemu-cca.sh [bench]`.
+- W4 opens an ssh session to the N1SDP, configures the network by `./net.sh` and pins the vCPU by `./pin_vcpus.sh`.
+
+For each benchmark, you need to:
+
+- W4: `./net.sh`(Only needed for the first time after rebooting)
+- W3: `./run-qemu-kvm.sh [bench]` or `./run-qemu-cca.sh [bench]`
+- W4: `./pin_vcpu.sh`
+- W2: `./[bench].sh 192.168.1.1`
+- W3: `halt -p`
+- W2: `./avg.py [bench].txt`
+
+
+#### 2.4.2 Running the VM
 
 Make sure you choose the entry `Ubuntu N1SDP realm - QEMU` in the GRUB menu. After the login interface prompts, you can ssh to the N1SDP from the jump host:
 
@@ -327,7 +350,11 @@ shell and run:
 Once the vCPUs are pinned, the VM will boot. The VM is configured with IP address `192.168.11.11` and you can run each benchmarks using the
 scripts on the jump host. We will cover this in the next section.
 
+
+***OPTIONAL for Running Benchmarks***
+
 You can login to the VM either through the VM serial port or using ssh. The username and password for the VM are both `root`:
+
 ```
 ssh -o StrictHostKeyChecking=no -o StrictHostKeyChecking=no 192.168.11.11
 ```
@@ -335,7 +362,7 @@ ssh -o StrictHostKeyChecking=no -o StrictHostKeyChecking=no 192.168.11.11
 Note that `-o StrictHostKeyChecking=no -o StrictHostKeyChecking=no` is required for ssh'ing to the VM because all VM is configured to use the same IP
 address but they have different ECDSA keys.
 
-### 2.4.3 Running the Benchmarks on the VM
+#### 2.4.3 Running the Benchmarks on the VM
 
 To run benchmarks on the VM, make sure the network is correctly configured for the VM (by running `./net`) before launching the VM.
 If the network of the VM is configured correctly, its IP address should be `192.168.11.11`. You can use `ip addr` on the VM to check it out.
@@ -346,7 +373,7 @@ You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for exa
 ./apache.sh 192.168.11.11
 ```
 
-`[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
+`[bench]` can be `apache`, `hack`, `kern`, `memcached`, `mongo`, `mysql` or `redis`.
 
 The results will be saved to the corresponding `[bench].txt` and you can get the average results by:
 
@@ -354,7 +381,7 @@ The results will be saved to the corresponding `[bench].txt` and you can get the
 ./avg [bench].txt
 ```
 
-### 2.4.4 Running the Benchmarks on the baremetal
+#### 2.4.4 Running the Benchmarks on the baremetal
 
 To run benchmarks on the bare metal, make sure you select the correct kernel (see [Choose the Kernel](#241-choosing-the-kernel)). The bare metal host
 is configured with IP address `192.168.11.10`.
@@ -387,9 +414,9 @@ You can launch the benchmarks on the **jump host** by `./[bench.sh] IP`, for exa
 ./apache.sh 192.168.11.10
 ```
 
-`[bench]` can be `apache`, `memcached`, `mongo`, `mysql` or `redis`.
+`[bench]` can be `apache`, `hack`, `kern`, `memcached`, `mongo`, `mysql` or `redis`.
 
-### 2.4.2 Epilogue
+### 2.5 Epilogue
 
 After finishing the benchmark for a VM, please gently shutdown the VM by running `halt -p` on the VM to prevent VM disk image corruption.
 Similarly, to reboot the host, please first run `sudo halt -p` on the host and after `ttyUSB1` shows `reboot: Power down`, enter `reboot` on `ttyUSB0` to power cycle the machine.
