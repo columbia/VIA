@@ -680,12 +680,6 @@ Section Layer.
       constructor.
     Qed.
 
-    Global Instance set_rec_dispose_size_inv: PreservesInvariants set_rec_dispose_size_spec.
-    Proof.
-      constructor; intros; simpl; eauto.
-      constructor.
-    Qed.
-
     Global Instance set_rec_run_exit_reason_inv: PreservesInvariants set_rec_run_exit_reason_spec.
     Proof.
       constructor; intros; simpl; eauto.
@@ -1517,7 +1511,6 @@ Section Layer.
         ⊕ _get_rec_par_base ↦ gensem get_rec_par_base_spec
         ⊕ _get_rec_par_end ↦ gensem get_rec_par_end_spec
         ⊕ _set_rec_dispose_addr ↦ gensem set_rec_dispose_addr_spec
-        ⊕ _set_rec_dispose_size ↦ gensem set_rec_dispose_size_spec
         ⊕ _set_rec_run_exit_reason ↦ gensem set_rec_run_exit_reason_spec
         ⊕ _set_rec_run_disposed_addr ↦ gensem set_rec_run_disposed_addr_spec
         ⊕ _get_psci_result_x0 ↦ gensem get_psci_result_x0_spec

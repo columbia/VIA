@@ -137,6 +137,11 @@ VFILES:=proof/RelaxedMemory/weakenedWDRF/PageTable.v\
   proof/TableDataSMC/Specs/smc_data_destroy.v\
   proof/TableDataSMC/LowSpecs/smc_data_destroy.v\
   proof/TableDataSMC/Code/smc_data_destroy.v\
+  proof/TableDataSMC/RefProof/smc_data_create_unknown.v\
+  proof/TableDataSMC/CodeProof/smc_data_create_unknown.v\
+  proof/TableDataSMC/Specs/smc_data_create_unknown.v\
+  proof/TableDataSMC/LowSpecs/smc_data_create_unknown.v\
+  proof/TableDataSMC/Code/smc_data_create_unknown.v\
   proof/TableDataSMC/RefProof/smc_data_create.v\
   proof/TableDataSMC/CodeProof/smc_data_create.v\
   proof/TableDataSMC/Specs/smc_data_create.v\
@@ -170,6 +175,11 @@ VFILES:=proof/RelaxedMemory/weakenedWDRF/PageTable.v\
   proof/TableDataOpsRef3/Specs/data_destroy3.v\
   proof/TableDataOpsRef3/LowSpecs/data_destroy3.v\
   proof/TableDataOpsRef3/Code/data_destroy3.v\
+  proof/TableDataOpsRef3/RefProof/data_create_unknown3.v\
+  proof/TableDataOpsRef3/CodeProof/data_create_unknown3.v\
+  proof/TableDataOpsRef3/Specs/data_create_unknown3.v\
+  proof/TableDataOpsRef3/LowSpecs/data_create_unknown3.v\
+  proof/TableDataOpsRef3/Code/data_create_unknown3.v\
   proof/TableDataOpsRef3/RefProof/data_create3.v\
   proof/TableDataOpsRef3/CodeProof/data_create3.v\
   proof/TableDataOpsRef3/Specs/data_create3.v\
@@ -203,6 +213,11 @@ VFILES:=proof/RelaxedMemory/weakenedWDRF/PageTable.v\
   proof/TableDataOpsRef2/Specs/data_destroy2.v\
   proof/TableDataOpsRef2/LowSpecs/data_destroy2.v\
   proof/TableDataOpsRef2/Code/data_destroy2.v\
+  proof/TableDataOpsRef2/RefProof/data_create_unknown2.v\
+  proof/TableDataOpsRef2/CodeProof/data_create_unknown2.v\
+  proof/TableDataOpsRef2/Specs/data_create_unknown2.v\
+  proof/TableDataOpsRef2/LowSpecs/data_create_unknown2.v\
+  proof/TableDataOpsRef2/Code/data_create_unknown2.v\
   proof/TableDataOpsRef2/RefProof/data_create2.v\
   proof/TableDataOpsRef2/CodeProof/data_create2.v\
   proof/TableDataOpsRef2/Specs/data_create2.v\
@@ -236,6 +251,11 @@ VFILES:=proof/RelaxedMemory/weakenedWDRF/PageTable.v\
   proof/TableDataOpsRef1/Specs/data_destroy1.v\
   proof/TableDataOpsRef1/LowSpecs/data_destroy1.v\
   proof/TableDataOpsRef1/Code/data_destroy1.v\
+  proof/TableDataOpsRef1/RefProof/data_create_unknown1.v\
+  proof/TableDataOpsRef1/CodeProof/data_create_unknown1.v\
+  proof/TableDataOpsRef1/Specs/data_create_unknown1.v\
+  proof/TableDataOpsRef1/LowSpecs/data_create_unknown1.v\
+  proof/TableDataOpsRef1/Code/data_create_unknown1.v\
   proof/TableDataOpsRef1/RefProof/data_create1.v\
   proof/TableDataOpsRef1/CodeProof/data_create1.v\
   proof/TableDataOpsRef1/Specs/data_create1.v\
@@ -269,6 +289,11 @@ VFILES:=proof/RelaxedMemory/weakenedWDRF/PageTable.v\
   proof/TableDataOpsIntro/Specs/data_destroy.v\
   proof/TableDataOpsIntro/LowSpecs/data_destroy.v\
   proof/TableDataOpsIntro/Code/data_destroy.v\
+  proof/TableDataOpsIntro/RefProof/data_create_unknown.v\
+  proof/TableDataOpsIntro/CodeProof/data_create_unknown.v\
+  proof/TableDataOpsIntro/Specs/data_create_unknown.v\
+  proof/TableDataOpsIntro/LowSpecs/data_create_unknown.v\
+  proof/TableDataOpsIntro/Code/data_create_unknown.v\
   proof/TableDataOpsIntro/RefProof/data_create.v\
   proof/TableDataOpsIntro/CodeProof/data_create.v\
   proof/TableDataOpsIntro/Specs/data_create.v\
