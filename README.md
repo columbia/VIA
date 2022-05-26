@@ -190,9 +190,6 @@ run network benchmarks from the jump host as the client.
 |:--:|
 | **Fig 2: Topology of the N1SDP and jump host.** |
 
-Send an email to [osdi22paper196ae@gmail.com](mailto:osdi22paper196ae@gmail.com) with the subject "OSDI AE" and your ssh public key in the content so 
-we can register you to the server and send you instructions on connecting to it.
-
 #### 2.1.2 Setup the Jump Host
 
 Once you have access to the jump host, you may clone this repo to it to run the benchmarks.
